@@ -26,17 +26,17 @@ open scoped goldenRatio
 
 /-- √5 > 2, since 5 > 4 and the square root is increasing. -/
 theorem sqrt5_gt_two : (2 : ℝ) < Real.sqrt 5 := by
-  have : (2 : ℝ) = Real.sqrt 4 := by
-    rw [Real.sqrt_eq_iff_sq_eq (by norm_num) (by norm_num)]; norm_num
-  rw [this]
-  exact Real.sqrt_lt_sqrt (by norm_num) (by norm_num)
+  rw [Real.lt_sqrt (by norm_num)]
+  norm_num
 
 /-- φ - φ⁻¹ = 1. Equivalently, φ(φ-1) = 1, i.e., φ² - φ = 1, i.e., φ² = φ+1. -/
 theorem goldenRatio_sub_inv : φ - φ⁻¹ = 1 := by
   have hpos : (0 : ℝ) < φ := goldenRatio_pos
-  rw [eq_sub_iff_add_eq, ← div_eq_iff (ne_of_gt hpos), div_add_div_same]
-  rw [div_eq_one_iff_eq (ne_of_gt hpos)]
-  nlinarith [goldenRatio_sq]
+  have hne : φ ≠ 0 := ne_of_gt hpos
+  have key : φ * (φ - φ⁻¹) = φ * 1 := by
+    rw [mul_sub, mul_inv_cancel₀ hne, mul_one]
+    linear_combination goldenRatio_sq
+  exact mul_left_cancel₀ hne key
 
 /-! ### The minimality lemma -/
 
@@ -68,7 +68,7 @@ theorem no_norm_one_unit_in_one_phi (a b : ℤ)
   have huc_lt1 : uc < 1 := by
     rw [huc_eq]; exact inv_lt_one_of_one_lt₀ h1
   have huc_gt : φ⁻¹ < uc := by
-    rw [huc_eq]; exact inv_lt_inv_of_lt hu_pos h2
+    rw [huc_eq]; exact (inv_lt_inv₀ goldenRatio_pos hu_pos).2 h2
   -- (4) u - uc = b·√5 (conjugate difference)
   have hdiff : u - uc = (b : ℝ) * Real.sqrt 5 := by
     simp only [hu_def, huc_def]
@@ -122,7 +122,7 @@ theorem no_norm_neg_one_unit_in_one_phi (a b : ℤ)
   have huc_neg : uc < 0 := by
     have : 0 < u * (-uc) := by nlinarith [hprod]
     have : 0 < -uc := by
-      exact pos_of_mul_pos_left this (le_of_lt hu_pos)
+      exact pos_of_mul_pos_right this (le_of_lt hu_pos)
     linarith
   -- u - uc = b * √5
   have hdiff : u - uc = (b : ℝ) * Real.sqrt 5 := by
@@ -142,11 +142,8 @@ theorem no_norm_neg_one_unit_in_one_phi (a b : ℤ)
   -- Actually: b * √5 = u + |uc| < φ + φ⁻¹. And φ + φ⁻¹ = φ + (φ-1) = 2φ-1 = √5.
   -- Key: b * √5 < √5, so b < 1. Contradiction with b ≥ 1.
   have hphi_plus_inv : φ + φ⁻¹ = Real.sqrt 5 := by
-    have hpos : (0 : ℝ) < φ := goldenRatio_pos
-    rw [← goldenRatio_sub_goldenConj]
-    -- φ - ψ = √5. And φ + φ⁻¹ = φ - ψ since φ⁻¹ = -ψ
-    rw [← inv_goldenRatio]  -- φ⁻¹ = -ψ
-    ring
+    rw [inv_goldenRatio]  -- φ⁻¹ = -ψ
+    linarith [goldenRatio_sub_goldenConj]
   -- u * uc = -1 and u > 1 means uc = -1/u ∈ (-1, 0)
   have huc_gt_neg1 : -1 < uc := by
     have hu_ne : u ≠ 0 := ne_of_gt hu_pos
@@ -160,40 +157,37 @@ theorem no_norm_neg_one_unit_in_one_phi (a b : ℤ)
     have : 0 < u⁻¹ := inv_pos.mpr hu_pos
     have : u⁻¹ < 1 := inv_lt_one_of_one_lt₀ hu_gt1
     linarith
-  -- b * √5 = u - uc < u + 1 < φ + 1. But also b * √5 < φ + φ⁻¹ = √5.
-  -- From huc_gt_neg1: uc > -1, so -uc < 1. And u < φ. So u - uc < φ + 1.
-  -- Better: u - uc < φ - (-1) = φ + 1. And we want b * √5 < √5.
-  -- From uc > -φ⁻¹: since |uc| = 1/u < 1/1 = 1 and actually 1/u < 1/φ:
-  --   u > φ... NO, u < φ! So 1/u > 1/φ = φ-1. So uc = -1/u < -(φ-1) = 1-φ < 0.
-  --   Hence -uc > φ-1.
-  have huc_lt_neg_phi_inv : uc < -(φ - 1) := by
+  -- b * √5 = u - uc = u + u⁻¹ (since uc = -u⁻¹), and u ↦ u + u⁻¹ is *increasing* on
+  -- u > 1 (its minimum sits at u = 1): (φ-u)(uφ-1) > 0 since u < φ (first factor > 0)
+  -- and u, φ > 1 hence uφ > 1 (second factor > 0), which rearranges to exactly
+  -- u + u⁻¹ < φ + φ⁻¹ = √5. (An earlier version of this file tried to bound uc
+  -- directly from u < φ alone, which gives uc's bound in the *wrong* direction for
+  -- this step — u < φ alone only pins uc < 1-φ, an upper bound, when what's needed
+  -- here is a lower bound on uc; monotonicity of u + u⁻¹ is the fix.)
+  have huc_eq2 : uc = -u⁻¹ := by
     have hu_ne : u ≠ 0 := ne_of_gt hu_pos
-    have huc_val : uc = -u⁻¹ := by
-      rw [← neg_eq_iff_eq_neg]
-      apply mul_left_cancel₀ hu_ne
-      rw [mul_neg, mul_inv_cancel₀ hu_ne]
-      linarith
-    rw [huc_val]
-    have : φ - 1 < u⁻¹ := by
-      rw [show φ - 1 = φ⁻¹ from by nlinarith [goldenRatio_sq, goldenRatio_pos]]
-      exact inv_lt_inv_of_lt h2 hu_pos
-    linarith
-  -- b * √5 = u - uc > u + (φ-1) > 1 + (φ-1) = φ > 2
-  -- And b * √5 = u - uc < φ - uc < φ + (φ-1) = 2φ-1 = √5 (using goldenRatio_sq: φ²=φ+1 → 2φ-1=√5? No: 2φ-1 = 1+√5-1 = √5.)
-  -- So b * √5 < √5, meaning b < 1. Contradiction with b ≥ 1.
+    rw [← neg_eq_iff_eq_neg]
+    apply mul_left_cancel₀ hu_ne
+    rw [mul_neg, mul_inv_cancel₀ hu_ne]
+    linarith [hprod]
   have hbsq5_lt_sq5 : (b : ℝ) * Real.sqrt 5 < Real.sqrt 5 := by
-    rw [← hdiff]
-    have : u - uc < φ - uc := by linarith [h2]
-    have : φ - uc < φ - (-(φ - 1)) := by linarith [huc_lt_neg_phi_inv]
-    have hphi_arith : φ - (-(φ - 1)) = 2*φ - 1 := by ring
-    have h2phi_sq5 : 2*φ - 1 = Real.sqrt 5 := by
-      rw [show Real.sqrt 5 = φ - Real.goldenConj from goldenRatio_sub_goldenConj.symm]
-      rw [Real.goldenConj, Real.goldenRatio]
+    rw [← hdiff, huc_eq2, sub_neg_eq_add, ← hphi_plus_inv]
+    have hune : u ≠ 0 := ne_of_gt hu_pos
+    have hφne : φ ≠ 0 := ne_of_gt goldenRatio_pos
+    have hprod_pos : (0 : ℝ) < u * φ - 1 := by nlinarith [hu_gt1, goldenRatio_pos, h2]
+    rw [← sub_pos]
+    have key : φ + φ⁻¹ - (u + u⁻¹) = (φ - u) * (u * φ - 1) / (u * φ) := by
+      field_simp
       ring
-    linarith [hphi_arith, h2phi_sq5]
+    rw [key]
+    exact div_pos (mul_pos (by linarith [h2]) hprod_pos) (by positivity)
   -- b ≥ 1 → b * √5 ≥ √5 > 0, but b * √5 < √5. Contradiction.
   have : (b : ℝ) * Real.sqrt 5 ≥ Real.sqrt 5 :=
     le_mul_of_one_le_left (Real.sqrt_nonneg 5) hb_ge1
   linarith
 
 end BealMinimalityNormArg
+
+-- Axiom checks: only [propext, Classical.choice, Quot.sound] are permitted.
+#print axioms BealMinimalityNormArg.no_norm_one_unit_in_one_phi
+#print axioms BealMinimalityNormArg.no_norm_neg_one_unit_in_one_phi

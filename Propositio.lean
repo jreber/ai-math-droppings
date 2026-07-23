@@ -186,6 +186,7 @@ import Propositio.NumberTheory.Beal.LambdaNormBridge
 import Propositio.NumberTheory.Beal.LambdaResidue
 import Propositio.NumberTheory.Beal.LocalCRT
 import Propositio.NumberTheory.Beal.LocalSolubility
+import Propositio.NumberTheory.Beal.MinimalityNormArg
 import Propositio.NumberTheory.Beal.Misc
 import Propositio.NumberTheory.Beal.MixedSigLocal2
 import Propositio.NumberTheory.Beal.MixedSignatureGeneral
@@ -314,6 +315,7 @@ import Propositio.NumberTheory.Collatz.SecondMomentLimit
 import Propositio.NumberTheory.Collatz.ShortCycleExclusion
 import Propositio.NumberTheory.Collatz.SixteenCycle
 import Propositio.NumberTheory.Collatz.SteinerClosedForm
+import Propositio.NumberTheory.Collatz.SteinerNumerator
 import Propositio.NumberTheory.Collatz.StoppingCompare
 import Propositio.NumberTheory.Collatz.StoppingComplDensity
 import Propositio.NumberTheory.Collatz.StoppingDensityOne

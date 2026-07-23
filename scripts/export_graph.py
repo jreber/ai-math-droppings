@@ -84,7 +84,9 @@ def mine_axioms_from_logs():
     """theorem short-name -> sorted axiom list, module -> worst tier, from any
     /tmp/*build*.log left by a `lake build` run."""
     theorem_axioms = {}
-    logpaths = glob.glob("/tmp/*build*.log") + glob.glob("/tmp/axiom_audit_batch_*.log")
+    # broad glob: ad-hoc build-log filenames vary session to session (build/verify/audit/...)
+    # and the axiom-line regex is specific enough that scanning extra unrelated logs is harmless
+    logpaths = glob.glob("/tmp/*.log")
     for logpath in logpaths:
         try:
             with open(logpath, errors="ignore") as f:
