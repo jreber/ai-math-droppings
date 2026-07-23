@@ -310,6 +310,7 @@ import Propositio.NumberTheory.Collatz.PowGapNormalize
 import Propositio.NumberTheory.Collatz.PowGapOfHdvd
 import Propositio.NumberTheory.Collatz.PowGapReduce
 import Propositio.NumberTheory.Collatz.PowGapSmall
+import Propositio.NumberTheory.Collatz.PromotionTest
 import Propositio.NumberTheory.Collatz.ResidueDescent
 import Propositio.NumberTheory.Collatz.SecondMomentLimit
 import Propositio.NumberTheory.Collatz.ShortCycleExclusion
