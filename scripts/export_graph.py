@@ -36,7 +36,7 @@ DOC_RE = re.compile(r"/-!(.*?)-/", re.DOTALL)
 DECL_DOC_RE = re.compile(r"/--(.*?)-/\s*\n\s*(theorem|lemma)\s+([A-Za-z0-9_'.]+)", re.DOTALL)
 STRUCT_FIELD_RE = re.compile(r"^\s*(Status|Source|Headline)\s*:\s*(.+)$", re.MULTILINE)
 AXIOM_LINE_RE = re.compile(
-    r"(?:info: )?(Propositio/[A-Za-z0-9_/]+\.lean):\d+:\d+: '([A-Za-z0-9_'.]+)' depends on axioms: \[([^\]]*)\]"
+    r"'([A-Za-z0-9_'.]+)' depends on axioms: \[([^\]]*)\]"
 )
 CLEAN_AXIOMS = {"propext", "Classical.choice", "Quot.sound"}
 
@@ -84,13 +84,14 @@ def mine_axioms_from_logs():
     """theorem short-name -> sorted axiom list, module -> worst tier, from any
     /tmp/*build*.log left by a `lake build` run."""
     theorem_axioms = {}
-    for logpath in glob.glob("/tmp/*build*.log"):
+    logpaths = glob.glob("/tmp/*build*.log") + glob.glob("/tmp/axiom_audit_batch_*.log")
+    for logpath in logpaths:
         try:
             with open(logpath, errors="ignore") as f:
                 text = f.read()
         except OSError:
             continue
-        for filepath, thname, axlist in AXIOM_LINE_RE.findall(text):
+        for thname, axlist in AXIOM_LINE_RE.findall(text):
             axioms = sorted(a.strip() for a in axlist.split(",") if a.strip())
             theorem_axioms[thname] = axioms
     return theorem_axioms
@@ -102,6 +103,8 @@ def tier_for_axioms(axioms):
     axset = set(axioms)
     if axset <= CLEAN_AXIOMS:
         return "clean"
+    if "sorryAx" in axset:
+        return "sorry"
     if any("native_decide" in a or "ofReduceBool" in a for a in axioms):
         return "native_decide"
     if axset - CLEAN_AXIOMS:

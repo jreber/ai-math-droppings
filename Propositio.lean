@@ -63,6 +63,7 @@ import Propositio.Beal.FreyInvariants
 import Propositio.Beal.FreyJ
 import Propositio.Beal.FreyRadical
 import Propositio.Beal.FreyReduction
+import Propositio.Beal.FrobeniusMod5
 import Propositio.Beal.FundamentalUnit
 import Propositio.Beal.FundamentalUnitPell
 import Propositio.Beal.GoldenIntCoprime
@@ -72,8 +73,14 @@ import Propositio.Beal.GoldenIntUnits
 import Propositio.Beal.GoldenKummerEngine
 import Propositio.Beal.GoldenMinPoly
 import Propositio.Beal.HasseIndex
+import Propositio.Beal.HigherExpLocal
 import Propositio.Beal.HigherMasterCapstone
+import Propositio.Beal.KummerConverse
+import Propositio.Beal.KummerDescentMod5
+import Propositio.Beal.KummerFivePower
 import Propositio.Beal.KummerLambda4Congruence
+import Propositio.Beal.KummerP5Assembly
+import Propositio.Beal.KummerP5Faithful
 import Propositio.Beal.KummerSign
 import Propositio.Beal.KummerTorsionAbsorb5
 import Propositio.Beal.Lambda4FullCharacterization
@@ -84,6 +91,7 @@ import Propositio.Beal.LambdaResidue
 import Propositio.Beal.LocalCRT
 import Propositio.Beal.LocalSolubility
 import Propositio.Beal.Misc
+import Propositio.Beal.MixedSigLocal2
 import Propositio.Beal.MixedSignatureGeneral
 import Propositio.Beal.ModEight
 import Propositio.Beal.PPZCapstone
@@ -103,6 +111,7 @@ import Propositio.Beal.Reduction
 import Propositio.Beal.RingOfIntegersBasisKPlus
 import Propositio.Beal.SevenCapstone
 import Propositio.Beal.SevenMinPoly
+import Propositio.Beal.SevenMixedLocal
 import Propositio.Beal.SevenPID
 import Propositio.Beal.SevenRealReduction
 import Propositio.Beal.SevenRealSubfield
@@ -130,14 +139,17 @@ import Propositio.Collatz.BinomialTail
 import Propositio.Collatz.CascadeCycles
 import Propositio.Collatz.Chebyshev30
 import Propositio.Collatz.Chebyshev30Aentropy
+import Propositio.Collatz.Chebyshev30Lcm
 import Propositio.Collatz.Chebyshev30LcmAll
 import Propositio.Collatz.Chebyshev30LcmCensus
+import Propositio.Collatz.Chebyshev30LcmPin
 import Propositio.Collatz.Chebyshev30LcmPinSharp
 import Propositio.Collatz.Chebyshev30LcmTight
 import Propositio.Collatz.Chebyshev30M
 import Propositio.Collatz.Chebyshev30MSize
 import Propositio.Collatz.Chebyshev30PadicM
 import Propositio.Collatz.Chebyshev30PsiThetaGap
+import Propositio.Collatz.Chebyshev30Size
 import Propositio.Collatz.Chebyshev30Stirling
 import Propositio.Collatz.Chebyshev30Theta
 import Propositio.Collatz.Chebyshev30ThetaLower
@@ -154,6 +166,7 @@ import Propositio.Collatz.CycleTelescope
 import Propositio.Collatz.CycleUniform
 import Propositio.Collatz.Cycles
 import Propositio.Collatz.DensityCount
+import Propositio.Collatz.DensityMod32
 import Propositio.Collatz.Descent23
 import Propositio.Collatz.DescentDensity
 import Propositio.Collatz.DescentDensity78
@@ -171,6 +184,7 @@ import Propositio.Collatz.ElevenD
 import Propositio.Collatz.ElevenE
 import Propositio.Collatz.ElevenF
 import Propositio.Collatz.ElevenG
+import Propositio.Collatz.ExactIterate
 import Propositio.Collatz.FifteenCycle
 import Propositio.Collatz.FourteenCycle
 import Propositio.Collatz.FractalEscape
@@ -185,10 +199,14 @@ import Propositio.Collatz.NonDescentWeight
 import Propositio.Collatz.ParityBijection
 import Propositio.Collatz.ParityVector
 import Propositio.Collatz.PowGapBaker
+import Propositio.Collatz.PowGapBounded1200
 import Propositio.Collatz.PowGapBounded1280
 import Propositio.Collatz.PowGapBounded170
+import Propositio.Collatz.PowGapBounded560
+import Propositio.Collatz.PowGapCapstone112
 import Propositio.Collatz.PowGapCapstone120
 import Propositio.Collatz.PowGapCapstone22
+import Propositio.Collatz.PowGapCapstone60
 import Propositio.Collatz.PowGapMeasureBridge
 import Propositio.Collatz.PowGapMu
 import Propositio.Collatz.PowGapNormalize
@@ -199,7 +217,7 @@ import Propositio.Collatz.ResidueDescent
 import Propositio.Collatz.SecondMomentLimit
 import Propositio.Collatz.ShortCycleExclusion
 import Propositio.Collatz.SixteenCycle
-import Propositio.Collatz.SteinerNumerator
+import Propositio.Collatz.SteinerClosedForm
 import Propositio.Collatz.StoppingCompare
 import Propositio.Collatz.StoppingComplDensity
 import Propositio.Collatz.StoppingDensityOne
@@ -248,6 +266,8 @@ import Propositio.Collatz.ThirteenL24_14
 import Propositio.Collatz.ThirteenL24_15
 import Propositio.Collatz.ThirteenL24_16
 import Propositio.Collatz.ThirteenL24_17
+import Propositio.Collatz.ThirteenL24_18
+import Propositio.Collatz.ThirteenL24_19
 import Propositio.Collatz.ThirteenL24_2
 import Propositio.Collatz.ThirteenL24_3
 import Propositio.Collatz.ThirteenL24_4
@@ -256,6 +276,8 @@ import Propositio.Collatz.ThirteenL24_6
 import Propositio.Collatz.ThirteenL24_7
 import Propositio.Collatz.ThirteenL24_8
 import Propositio.Collatz.ThirteenL24_9
+import Propositio.Collatz.ThirteenL25_0
+import Propositio.Collatz.ThirteenL25_1
 import Propositio.Collatz.ThirteenL25_10
 import Propositio.Collatz.ThirteenL25_11
 import Propositio.Collatz.ThirteenL25_12
@@ -266,6 +288,7 @@ import Propositio.Collatz.ThirteenL25_16
 import Propositio.Collatz.ThirteenL25_17
 import Propositio.Collatz.ThirteenL25_18
 import Propositio.Collatz.ThirteenL25_19
+import Propositio.Collatz.ThirteenL25_2
 import Propositio.Collatz.ThirteenL25_20
 import Propositio.Collatz.ThirteenL25_21
 import Propositio.Collatz.ThirteenL25_22
@@ -276,6 +299,7 @@ import Propositio.Collatz.ThirteenL25_26
 import Propositio.Collatz.ThirteenL25_27
 import Propositio.Collatz.ThirteenL25_28
 import Propositio.Collatz.ThirteenL25_29
+import Propositio.Collatz.ThirteenL25_3
 import Propositio.Collatz.ThirteenL25_30
 import Propositio.Collatz.ThirteenL25_31
 import Propositio.Collatz.ThirteenL25_32
@@ -286,6 +310,9 @@ import Propositio.Collatz.ThirteenL25_36
 import Propositio.Collatz.ThirteenL25_37
 import Propositio.Collatz.ThirteenL25_38
 import Propositio.Collatz.ThirteenL25_39
+import Propositio.Collatz.ThirteenL25_4
+import Propositio.Collatz.ThirteenL25_5
+import Propositio.Collatz.ThirteenL25_6
 import Propositio.Collatz.ThirteenL25_7
 import Propositio.Collatz.ThirteenL25_8
 import Propositio.Collatz.ThirteenL25_9
