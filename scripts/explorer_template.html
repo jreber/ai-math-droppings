@@ -1,0 +1,882 @@
+<title>Propositio — Proof Explorer</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<style>
+/* ---- design tokens ---------------------------------------------------- */
+:root {
+  --board:      #1c2420;
+  --board-hi:   #232d27;
+  --board-line: #33413a;
+  --chalk:      #eee6d3;
+  --chalk-dim:  #b9c2ba;
+  --chalk-faint:#77857c;
+  --gold:       #d9b158;
+  --gold-dim:   #a9884a;
+  --good:       #7fb87a;
+  --warn:       #d9b158;
+  --bad:        #d97a5f;
+  --crit:       #c65a4a;
+  --unknown:    #5c6960;
+  --radius: 3px;
+  --serif: Iowan Old Style, Palatino Linotype, Palatino, Georgia, "Noto Serif", serif;
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --mono: ui-monospace, "SF Mono", "Cascadia Mono", "JetBrains Mono", Consolas, "Liberation Mono", monospace;
+}
+:root[data-theme="light"] {
+  --board:      #f4f2ec;
+  --board-hi:   #ffffff;
+  --board-line: #d8d3c4;
+  --chalk:      #262421;
+  --chalk-dim:  #55524a;
+  --chalk-faint:#8a8579;
+  --gold:       #8a6a1f;
+  --gold-dim:   #a9884a;
+  --good:       #3f7a3a;
+  --warn:       #8a6a1f;
+  --bad:        #a54a34;
+  --crit:       #a3392a;
+  --unknown:    #9aa39a;
+}
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --board:      #f4f2ec;
+    --board-hi:   #ffffff;
+    --board-line: #d8d3c4;
+    --chalk:      #262421;
+    --chalk-dim:  #55524a;
+    --chalk-faint:#8a8579;
+    --gold:       #8a6a1f;
+    --gold-dim:   #a9884a;
+    --good:       #3f7a3a;
+    --warn:       #8a6a1f;
+    --bad:        #a54a34;
+    --crit:       #a3392a;
+    --unknown:    #9aa39a;
+  }
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; }
+body {
+  background: var(--board);
+  color: var(--chalk);
+  font-family: var(--sans);
+  overflow: hidden;
+  transition: background .25s, color .25s;
+}
+::selection { background: var(--gold); color: var(--board); }
+button, select, input { font-family: inherit; }
+
+/* ---- layout ------------------------------------------------------------ */
+#app { display: flex; flex-direction: column; height: 100%; }
+
+header {
+  display: flex; align-items: baseline; gap: 1.1rem;
+  padding: .85rem 1.25rem .7rem;
+  border-bottom: 1px solid var(--board-line);
+  flex-wrap: wrap;
+}
+header h1 {
+  font-family: var(--serif); font-weight: 600; font-style: italic;
+  font-size: 1.5rem; margin: 0; letter-spacing: .01em;
+  text-wrap: balance;
+}
+header h1 .dot { color: var(--gold); font-style: normal; }
+header .tagline {
+  font-family: var(--serif); font-style: italic; color: var(--chalk-faint);
+  font-size: .92rem; margin-right: auto;
+}
+header .stats {
+  font-family: var(--mono); font-size: .72rem; color: var(--chalk-dim);
+  display: flex; gap: 1rem; font-variant-numeric: tabular-nums;
+}
+header .stats b { color: var(--gold); font-weight: 600; }
+#theme-toggle {
+  background: none; border: 1px solid var(--board-line); color: var(--chalk-dim);
+  border-radius: var(--radius); padding: .3rem .55rem; cursor: pointer; font-size: .75rem;
+}
+#theme-toggle:hover { border-color: var(--gold-dim); color: var(--chalk); }
+
+.breadcrumb {
+  padding: .5rem 1.25rem; font-family: var(--mono); font-size: .78rem;
+  color: var(--chalk-faint); display: flex; align-items: center; gap: .4rem;
+  border-bottom: 1px solid var(--board-line);
+}
+.breadcrumb button {
+  background: none; border: none; color: var(--gold); cursor: pointer;
+  font-family: inherit; font-size: inherit; padding: 0;
+}
+.breadcrumb button:hover { text-decoration: underline; }
+.breadcrumb .sep { color: var(--board-line); }
+.breadcrumb .current { color: var(--chalk); }
+
+main { flex: 1; display: flex; min-height: 0; }
+
+#canvas-wrap { flex: 1; position: relative; min-width: 0; }
+canvas { display: block; width: 100%; height: 100%; cursor: grab; }
+canvas.dragging { cursor: grabbing; }
+
+#hint {
+  position: absolute; left: 1.25rem; bottom: 1rem; font-family: var(--serif);
+  font-style: italic; font-size: .82rem; color: var(--chalk-faint);
+  pointer-events: none; max-width: 30ch; text-wrap: balance;
+}
+
+#tooltip {
+  position: absolute; pointer-events: none; background: var(--board-hi);
+  border: 1px solid var(--gold-dim); border-radius: var(--radius);
+  padding: .5rem .65rem; font-size: .76rem; max-width: 320px; display: none;
+  box-shadow: 0 6px 20px rgba(0,0,0,.35); z-index: 5; line-height: 1.4;
+}
+#tooltip .t-name { font-family: var(--mono); color: var(--gold); font-weight: 600; }
+#tooltip .t-meta { color: var(--chalk-faint); margin-top: .2rem; font-size: .72rem; }
+
+/* ---- sidebar: filters --------------------------------------------------- */
+#filters {
+  width: 220px; flex-shrink: 0; border-right: 1px solid var(--board-line);
+  padding: 1rem .9rem; overflow-y: auto; font-size: .8rem;
+}
+#filters h2 {
+  font-family: var(--serif); font-style: italic; font-weight: 600; font-size: .95rem;
+  margin: 0 0 .7rem;
+}
+.filter-group { margin-bottom: 1.15rem; }
+.filter-group h3 {
+  font-size: .68rem; text-transform: uppercase; letter-spacing: .07em;
+  color: var(--chalk-faint); margin: 0 0 .45rem; font-weight: 600;
+}
+.chip-row { display: flex; flex-direction: column; gap: .3rem; }
+.chip {
+  display: flex; align-items: center; gap: .45rem; cursor: pointer;
+  padding: .22rem .3rem; border-radius: var(--radius); user-select: none;
+}
+.chip:hover { background: var(--board-hi); }
+.chip input { accent-color: var(--gold); }
+.chip .swatch {
+  width: .6rem; height: .6rem; border-radius: 50%; flex-shrink: 0;
+}
+.chip .count {
+  margin-left: auto; font-family: var(--mono); font-size: .7rem; color: var(--chalk-faint);
+  font-variant-numeric: tabular-nums;
+}
+#search {
+  width: 100%; background: var(--board-hi); border: 1px solid var(--board-line);
+  color: var(--chalk); border-radius: var(--radius); padding: .4rem .55rem;
+  font-size: .78rem; margin-bottom: 1rem;
+}
+#search:focus { outline: none; border-color: var(--gold-dim); }
+#families-toggle { display: flex; align-items: center; gap: .4rem; font-size: .78rem; cursor: pointer; }
+
+/* ---- drilldown panel ----------------------------------------------------- */
+#panel {
+  width: 380px; flex-shrink: 0; border-left: 1px solid var(--board-line);
+  padding: 1.1rem 1.15rem; overflow-y: auto; transform: translateX(100%);
+  transition: transform .22s ease; position: absolute; right: 0; top: 0; bottom: 0;
+  background: var(--board);
+}
+#panel.open { transform: translateX(0); position: relative; }
+#panel .empty { color: var(--chalk-faint); font-style: italic; font-family: var(--serif); margin-top: 2rem; }
+#panel .close { float: right; background: none; border: none; color: var(--chalk-faint); cursor: pointer; font-size: 1.1rem; line-height: 1; }
+#panel .close:hover { color: var(--chalk); }
+#panel .p-path { font-family: var(--mono); font-size: .68rem; color: var(--chalk-faint); word-break: break-all; }
+#panel h2 {
+  font-family: var(--mono); font-size: 1.02rem; margin: .5rem 0 .15rem; color: var(--gold);
+  word-break: break-word;
+}
+#panel .p-tier {
+  display: inline-block; font-size: .66rem; text-transform: uppercase; letter-spacing: .06em;
+  padding: .1rem .4rem; border-radius: 2px; margin: .3rem 0 .8rem; font-weight: 600;
+}
+#panel .p-section { margin-top: 1rem; }
+#panel .p-section h3 {
+  font-size: .68rem; text-transform: uppercase; letter-spacing: .07em; color: var(--chalk-faint);
+  margin: 0 0 .4rem; border-bottom: 1px solid var(--board-line); padding-bottom: .25rem;
+}
+#panel .p-doc {
+  font-family: var(--serif); font-size: .86rem; line-height: 1.55; color: var(--chalk-dim);
+}
+#panel .p-doc p { margin: 0 0 .7rem; }
+#panel .p-doc .p-doc-h {
+  font-weight: 600; font-style: italic; color: var(--chalk); margin: .9rem 0 .4rem; font-size: .92rem;
+}
+#panel .p-doc .p-doc-h:first-child { margin-top: 0; }
+#panel .p-doc .p-doc-ul { margin: 0 0 .7rem; padding-left: 1.1rem; }
+#panel .p-doc code {
+  font-family: var(--mono); font-size: .82em; background: var(--board-hi);
+  border: 1px solid var(--board-line); border-radius: 2px; padding: .05em .3em;
+}
+#panel .p-decl-list { list-style: none; margin: 0; padding: 0; font-family: var(--mono); font-size: .74rem; }
+#panel .p-decl-list li { padding: .28rem 0; border-bottom: 1px solid var(--board-line); }
+#panel .p-decl-list li:last-child { border-bottom: none; }
+#panel .p-ax { color: var(--chalk-faint); font-size: .68rem; display: block; margin-top: .1rem; }
+#panel .p-link-list { list-style: none; margin: 0; padding: 0; font-family: var(--mono); font-size: .73rem; }
+#panel .p-link-list li a {
+  color: var(--chalk-dim); text-decoration: none; cursor: pointer; display: block; padding: .18rem 0;
+}
+#panel .p-link-list li a:hover { color: var(--gold); }
+#panel .p-family-note {
+  font-family: var(--serif); font-style: italic; font-size: .8rem; color: var(--chalk-faint);
+  background: var(--board-hi); border-radius: var(--radius); padding: .6rem .7rem; margin-top: .4rem;
+}
+
+/* ---- legend footer -------------------------------------------------------- */
+footer {
+  border-top: 1px solid var(--board-line); padding: .45rem 1.25rem;
+  font-size: .68rem; color: var(--chalk-faint); display: flex; gap: 1.1rem; align-items: center;
+  font-family: var(--mono);
+}
+footer .lg { display: flex; align-items: center; gap: .3rem; }
+footer .sw { width: .55rem; height: .55rem; border-radius: 50%; }
+
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+</style>
+
+<div id="app">
+  <header>
+    <h1>Propositio<span class="dot">.</span></h1>
+    <div class="tagline">a formal library, mapped</div>
+    <div class="stats" id="header-stats"></div>
+    <button id="theme-toggle" title="Toggle theme">◐</button>
+  </header>
+  <div class="breadcrumb" id="breadcrumb"></div>
+  <main>
+    <div id="filters">
+      <h2>Filter the board</h2>
+      <input id="search" placeholder="search declarations, files…" autocomplete="off" />
+      <div class="filter-group">
+        <h3>Rigor</h3>
+        <div class="chip-row" id="tier-filters"></div>
+      </div>
+      <div class="filter-group">
+        <h3>Show only</h3>
+        <div class="chip-row">
+          <label class="chip"><input type="checkbox" id="headline-only" /> headline results</label>
+        </div>
+      </div>
+      <div class="filter-group" id="domain-filter-group" style="display:none">
+        <h3>Domain</h3>
+        <div class="chip-row" id="domain-filters"></div>
+      </div>
+      <div class="filter-group">
+        <label class="chip" style="padding-left:0">
+          <input type="checkbox" id="families-toggle-input" checked /> collapse mechanical families
+        </label>
+      </div>
+    </div>
+    <div id="canvas-wrap">
+      <canvas id="canvas"></canvas>
+      <div id="hint"></div>
+      <div id="tooltip"></div>
+    </div>
+    <div id="panel"><div class="empty">Click any node to inspect it.</div></div>
+  </main>
+  <footer id="legend"></footer>
+</div>
+
+<script>
+const GRAPH = __GRAPH_DATA__;
+
+/* ---------------------------------------------------------------- theme */
+const root = document.documentElement;
+const themeBtn = document.getElementById('theme-toggle');
+function currentTheme() {
+  if (root.getAttribute('data-theme')) return root.getAttribute('data-theme');
+  return matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+}
+themeBtn.onclick = () => {
+  root.setAttribute('data-theme', currentTheme() === 'dark' ? 'light' : 'dark');
+  draw();
+};
+
+/* ---------------------------------------------------------------- tiers */
+const TIER_META = {
+  clean:          { label: 'clean (propext / choice / quot)', color: '--good' },
+  native_decide:  { label: 'native_decide',                    color: '--warn' },
+  custom_axiom:   { label: 'custom axiom',                      color: '--crit' },
+  sorry:          { label: 'incomplete (sorry)',                color: '--bad' },
+  unknown:        { label: 'not yet audited',                   color: '--unknown' },
+};
+function cssVar(name) { return getComputedStyle(root).getPropertyValue(name).trim(); }
+function tierColor(t) { return cssVar(TIER_META[t] ? TIER_META[t].color : '--unknown'); }
+
+const DOMAIN_HUES = {}; // domain -> base hue, assigned deterministically
+(function assignHues() {
+  const golden = 137.508;
+  GRAPH.domains.forEach((d, i) => DOMAIN_HUES[d] = (i * golden) % 360);
+})();
+function domainColor(domain, alpha) {
+  const h = DOMAIN_HUES[domain] ?? 40;
+  return `hsla(${h}, 46%, ${currentTheme() === 'dark' ? 62 : 38}%, ${alpha ?? 1})`;
+}
+
+/* ---------------------------------------------------------------- state */
+const nodesById = new Map(GRAPH.nodes.map(n => [n.id, n]));
+const familyOf = new Map();
+Object.entries(GRAPH.families).forEach(([stem, members]) => members.forEach(m => familyOf.set(m, stem)));
+
+let view = { level: 'overview', domain: null };
+let filters = {
+  tiers: new Set(Object.keys(TIER_META)),
+  headlineOnly: false,
+  domains: new Set(GRAPH.domains),
+  collapseFamilies: true,
+  search: '',
+};
+let selected = null;
+let layoutCache = {};   // key -> {nodes:[{id,x,y,r,...}], edges:[...]}
+let camera = { x: 0, y: 0, zoom: 1 };
+let dragging = null;
+
+/* ---------------------------------------------------------------- header stats */
+function renderHeaderStats() {
+  const tierCounts = {};
+  GRAPH.nodes.forEach(n => tierCounts[n.axiomTier] = (tierCounts[n.axiomTier]||0)+1);
+  document.getElementById('header-stats').innerHTML =
+    `<span><b>${GRAPH.nodeCount}</b> files</span>` +
+    `<span><b>${GRAPH.edgeCount}</b> imports</span>` +
+    `<span><b>${Object.keys(GRAPH.families).length}</b> mechanical families</span>` +
+    `<span><b>${tierCounts.clean||0}</b> axiom-clean</span>`;
+}
+
+function renderLegend() {
+  const el = document.getElementById('legend');
+  el.innerHTML = Object.entries(TIER_META).map(([k,v]) =>
+    `<span class="lg"><span class="sw" style="background:${cssVar(v.color)}"></span>${v.label}</span>`
+  ).join('') + `<span class="lg" style="margin-left:auto">drag to pan · scroll to zoom · click a node to inspect</span>`;
+}
+
+/* ---------------------------------------------------------------- filters UI */
+function passesFilter(n) {
+  if (!filters.tiers.has(n.axiomTier)) return false;
+  if (filters.headlineOnly && !n.headline) return false;
+  if (!filters.domains.has(n.domain)) return false;
+  if (filters.search) {
+    const s = filters.search.toLowerCase();
+    const hay = (n.id + ' ' + n.declarations.join(' ')).toLowerCase();
+    if (!hay.includes(s)) return false;
+  }
+  return true;
+}
+
+function renderTierFilters() {
+  const el = document.getElementById('tier-filters');
+  const counts = {};
+  GRAPH.nodes.forEach(n => counts[n.axiomTier] = (counts[n.axiomTier]||0)+1);
+  el.innerHTML = Object.entries(TIER_META).map(([k, v]) => `
+    <label class="chip">
+      <input type="checkbox" data-tier="${k}" ${filters.tiers.has(k) ? 'checked' : ''}/>
+      <span class="swatch" style="background:${cssVar(v.color)}"></span>
+      ${v.label.split(' (')[0]}
+      <span class="count">${counts[k]||0}</span>
+    </label>`).join('');
+  el.querySelectorAll('input').forEach(inp => inp.onchange = () => {
+    const t = inp.dataset.tier;
+    inp.checked ? filters.tiers.add(t) : filters.tiers.delete(t);
+    invalidateLayout(); draw();
+  });
+}
+
+function renderDomainFilters() {
+  const el = document.getElementById('domain-filters');
+  const counts = {};
+  GRAPH.nodes.forEach(n => counts[n.domain] = (counts[n.domain]||0)+1);
+  el.innerHTML = GRAPH.domains.map(d => `
+    <label class="chip">
+      <input type="checkbox" data-domain="${d}" ${filters.domains.has(d) ? 'checked' : ''}/>
+      <span class="swatch" style="background:${domainColor(d,1)}"></span>
+      ${d}
+      <span class="count">${counts[d]||0}</span>
+    </label>`).join('');
+  el.querySelectorAll('input').forEach(inp => inp.onchange = () => {
+    const d = inp.dataset.domain;
+    inp.checked ? filters.domains.add(d) : filters.domains.delete(d);
+    invalidateLayout(); draw();
+  });
+}
+
+document.getElementById('headline-only').onchange = e => { filters.headlineOnly = e.target.checked; invalidateLayout(); draw(); };
+document.getElementById('families-toggle-input').onchange = e => { filters.collapseFamilies = e.target.checked; invalidateLayout(); draw(); };
+document.getElementById('search').oninput = e => { filters.search = e.target.value; invalidateLayout(); draw(); };
+
+function invalidateLayout() { layoutCache = {}; }
+
+/* ---------------------------------------------------------------- breadcrumb */
+function renderBreadcrumb() {
+  const el = document.getElementById('breadcrumb');
+  if (view.level === 'overview') {
+    el.innerHTML = `<span class="current">All domains</span>`;
+  } else {
+    el.innerHTML = `<button id="bc-home">All domains</button><span class="sep">›</span><span class="current">${view.domain}</span>`;
+    document.getElementById('bc-home').onclick = () => { view = {level:'overview', domain:null}; selected=null; closePanel(); draw(); };
+  }
+}
+
+/* ---------------------------------------------------------------- layout: overview (domain bubbles) */
+function computeOverviewLayout() {
+  const key = 'overview:' + JSON.stringify([...filters.domains].sort());
+  if (layoutCache[key]) return layoutCache[key];
+  const counts = {}, cross = {};
+  GRAPH.nodes.forEach(n => { if (filters.domains.has(n.domain)) counts[n.domain] = (counts[n.domain]||0)+1; });
+  GRAPH.edges.forEach(e => {
+    const a = nodesById.get(e.from), b = nodesById.get(e.to);
+    if (!a || !b) return;
+    if (!filters.domains.has(a.domain) || !filters.domains.has(b.domain)) return;
+    if (a.domain === b.domain) return;
+    const k = [a.domain,b.domain].sort().join('|');
+    cross[k] = (cross[k]||0)+1;
+  });
+  const doms = GRAPH.domains.filter(d => counts[d]);
+  const n = doms.length;
+  const nodes = doms.map((d,i) => {
+    const angle = (i / n) * Math.PI * 2 - Math.PI/2;
+    const R = 260;
+    return { id: '@domain:'+d, domain: d, label: d, count: counts[d],
+             r: 26 + Math.sqrt(counts[d]) * 5.5,
+             x: Math.cos(angle)*R, y: Math.sin(angle)*R, isDomain: true };
+  });
+  const byId = new Map(nodes.map(nn=>[nn.domain,nn]));
+  const edges = Object.entries(cross).map(([k,w]) => {
+    const [a,b] = k.split('|');
+    return { from: byId.get(a).id, to: byId.get(b).id, weight: w };
+  });
+  const res = { nodes, edges };
+  layoutCache[key] = res;
+  return res;
+}
+
+/* ---------------------------------------------------------------- layout: domain detail (force-directed) */
+function domainVisibleNodes(domain) {
+  let ns = GRAPH.nodes.filter(n => n.domain === domain && passesFilter(n));
+  if (filters.collapseFamilies) {
+    const seen = new Set();
+    const out = [];
+    for (const n of ns) {
+      const fam = familyOf.get(n.id);
+      if (fam) {
+        if (seen.has(fam)) continue;
+        seen.add(fam);
+        const members = GRAPH.families[fam].filter(m => nodesById.get(m) && nodesById.get(m).domain === domain);
+        const memberNodes = members.map(m => nodesById.get(m)).filter(Boolean);
+        const tiers = new Set(memberNodes.map(m=>m.axiomTier));
+        const worstTier = ['custom_axiom','sorry','native_decide','unknown','clean'].find(t=>tiers.has(t)) || 'unknown';
+        out.push({ id: '@family:'+fam, domain, label: fam.split('.').pop()+'…', isFamily: true,
+                    members, count: members.length, axiomTier: worstTier,
+                    headline: memberNodes.some(m=>m.headline) });
+      } else {
+        out.push(n);
+      }
+    }
+    ns = out;
+  }
+  return ns;
+}
+
+function computeDomainLayout(domain) {
+  const key = 'domain:'+domain+':'+JSON.stringify([...filters.tiers].sort())+filters.headlineOnly+filters.collapseFamilies+filters.search;
+  if (layoutCache[key]) return layoutCache[key];
+  const visible = domainVisibleNodes(domain);
+  const visibleIds = new Set(visible.map(n=>n.id));
+  const idToMember = new Map();
+  visible.forEach(n => { if (n.isFamily) n.members.forEach(m=>idToMember.set(m.id, n.id)); else idToMember.set(n.id, n.id); });
+
+  const edgeSet = new Set();
+  const edges = [];
+  GRAPH.edges.forEach(e => {
+    const a = nodesById.get(e.from), b = nodesById.get(e.to);
+    if (!a || !b || a.domain !== domain || b.domain !== domain) return;
+    const fa = idToMember.get(e.from), fb = idToMember.get(e.to);
+    if (!fa || !fb || fa === fb) return;
+    const k = fa+'->'+fb;
+    if (edgeSet.has(k)) return;
+    edgeSet.add(k);
+    edges.push({ from: fa, to: fb });
+  });
+
+  // seeded PRNG so layout is stable across re-renders with the same filter state
+  let seed = visible.length * 2654435761 % 2 ** 32;
+  function rnd() { seed = (seed * 1664525 + 1013904223) % 2**32; return seed / 2**32; }
+
+  const degree = new Map(visible.map(n => [n.id, 0]));
+  edges.forEach(e => { degree.set(e.from,(degree.get(e.from)||0)+1); degree.set(e.to,(degree.get(e.to)||0)+1); });
+
+  const nodes = visible.map((n) => {
+    const spread = 260 + Math.sqrt(visible.length) * 22;
+    return Object.assign({}, n, {
+      x: (rnd()-0.5) * spread,
+      y: (rnd()-0.5) * spread,
+      r: n.isFamily ? 9 + Math.sqrt(n.count)*2.6 : 5 + Math.sqrt((n.declarations||[]).length + 1) * 1.7,
+    });
+  });
+  const byId = new Map(nodes.map(n=>[n.id,n]));
+  // isolated nodes (no edges at all in this view) drift to a quiet ring on the
+  // outskirts rather than fighting connected clusters for the center
+  nodes.forEach(n => {
+    if (!degree.get(n.id)) { n.x *= 1.8; n.y *= 1.8; }
+  });
+
+  // capped force-directed relaxation, run synchronously up front
+  const ITER = Math.min(320, Math.max(120, Math.floor(16000 / Math.max(1,nodes.length))));
+  const k = 3200 / Math.sqrt(nodes.length + 1);
+  for (let it = 0; it < ITER; it++) {
+    for (let i = 0; i < nodes.length; i++) {
+      let fx = 0, fy = 0;
+      const A = nodes[i];
+      for (let j = 0; j < nodes.length; j++) {
+        if (i === j) continue;
+        const B = nodes[j];
+        let dx = A.x - B.x, dy = A.y - B.y;
+        let d2 = dx*dx + dy*dy || 0.01;
+        let d = Math.sqrt(d2);
+        const rep = (k*k) / d;
+        fx += (dx/d) * rep; fy += (dy/d) * rep;
+      }
+      // gentle pull toward center keeps the whole cluster from drifting apart
+      fx += -A.x * 0.012; fy += -A.y * 0.012;
+      A.fx = fx; A.fy = fy;
+    }
+    edges.forEach(e => {
+      const A = byId.get(e.from), B = byId.get(e.to);
+      if (!A || !B) return;
+      const dx = A.x-B.x, dy = A.y-B.y;
+      const d = Math.sqrt(dx*dx+dy*dy) || 0.01;
+      const attr = (d*d) / (k*2.4);
+      const ux = dx/d, uy = dy/d;
+      A.fx -= ux*attr; A.fy -= uy*attr;
+      B.fx += ux*attr; B.fy += uy*attr;
+    });
+    const damp = 0.9 * (1 - it/ITER) + 0.04;
+    nodes.forEach(n => {
+      n.x += Math.max(-40,Math.min(40,n.fx)) * damp * 0.03;
+      n.y += Math.max(-40,Math.min(40,n.fy)) * damp * 0.03;
+      n.x = Math.max(-1100, Math.min(1100, n.x));
+      n.y = Math.max(-1100, Math.min(1100, n.y));
+    });
+  }
+
+  const res = { nodes, edges };
+  layoutCache[key] = res;
+  return res;
+}
+
+/* ---------------------------------------------------------------- canvas + camera */
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
+function resize() {
+  const wrap = document.getElementById('canvas-wrap');
+  const dpr = window.devicePixelRatio || 1;
+  canvas.width = wrap.clientWidth * dpr;
+  canvas.height = wrap.clientHeight * dpr;
+  canvas.style.width = wrap.clientWidth+'px';
+  canvas.style.height = wrap.clientHeight+'px';
+  ctx.setTransform(dpr,0,0,dpr,0,0);
+  draw();
+}
+window.addEventListener('resize', resize);
+
+function worldToScreen(x,y) {
+  const w = canvas.width / (window.devicePixelRatio||1), h = canvas.height / (window.devicePixelRatio||1);
+  return [ w/2 + (x - camera.x) * camera.zoom, h/2 + (y - camera.y) * camera.zoom ];
+}
+function screenToWorld(sx,sy) {
+  const w = canvas.width / (window.devicePixelRatio||1), h = canvas.height / (window.devicePixelRatio||1);
+  return [ (sx - w/2)/camera.zoom + camera.x, (sy - h/2)/camera.zoom + camera.y ];
+}
+
+let currentDraw = { nodes: [], edges: [] };
+
+function draw() {
+  const w = canvas.width / (window.devicePixelRatio||1), h = canvas.height / (window.devicePixelRatio||1);
+  ctx.clearRect(0,0,w,h);
+  ctx.fillStyle = cssVar('--board');
+  ctx.fillRect(0,0,w,h);
+
+  // faint chalkboard grid
+  ctx.strokeStyle = cssVar('--board-line');
+  ctx.lineWidth = 1;
+  ctx.globalAlpha = 0.35;
+  const gridStep = 64 * camera.zoom;
+  const offX = (w/2 - camera.x*camera.zoom) % gridStep;
+  const offY = (h/2 - camera.y*camera.zoom) % gridStep;
+  for (let x = offX; x < w; x += gridStep) { ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,h); ctx.stroke(); }
+  for (let y = offY; y < h; y += gridStep) { ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(w,y); ctx.stroke(); }
+  ctx.globalAlpha = 1;
+
+  const data = view.level === 'overview' ? computeOverviewLayout() : computeDomainLayout(view.domain);
+  currentDraw = data;
+
+  // edges
+  data.edges.forEach(e => {
+    const A = data.nodes.find(n=>n.id===e.from), B = data.nodes.find(n=>n.id===e.to);
+    if (!A || !B) return;
+    const [ax,ay] = worldToScreen(A.x,A.y), [bx,by] = worldToScreen(B.x,B.y);
+    ctx.beginPath();
+    ctx.moveTo(ax,ay); ctx.lineTo(bx,by);
+    if (view.level === 'overview') {
+      ctx.strokeStyle = cssVar('--chalk-faint');
+      ctx.globalAlpha = Math.min(0.75, 0.15 + e.weight*0.02);
+      ctx.lineWidth = Math.min(9, 1 + e.weight*0.35);
+    } else {
+      ctx.strokeStyle = cssVar('--board-line');
+      ctx.globalAlpha = 0.8;
+      ctx.lineWidth = 1;
+    }
+    ctx.stroke();
+    ctx.globalAlpha = 1;
+  });
+
+  // nodes
+  data.nodes.forEach(n => {
+    const [sx,sy] = worldToScreen(n.x,n.y);
+    const r = n.r * camera.zoom;
+    if (sx < -r || sx > w+r || sy < -r || sy > h+r) return;
+    ctx.beginPath();
+    ctx.arc(sx,sy,Math.max(2,r),0,Math.PI*2);
+    if (n.isDomain) {
+      ctx.fillStyle = domainColor(n.domain, 0.24);
+      ctx.fill();
+      ctx.lineWidth = 2;
+      ctx.strokeStyle = domainColor(n.domain, 0.95);
+      ctx.stroke();
+    } else {
+      ctx.fillStyle = n.isFamily ? cssVar('--board-hi') : tierColor(n.axiomTier);
+      ctx.globalAlpha = n.isFamily ? 1 : 0.92;
+      ctx.fill();
+      ctx.globalAlpha = 1;
+      if (n.isFamily) {
+        ctx.lineWidth = 1.6;
+        ctx.strokeStyle = tierColor(n.axiomTier);
+        ctx.setLineDash([3,2]);
+        ctx.stroke();
+        ctx.setLineDash([]);
+      }
+      if (n.headline) {
+        ctx.lineWidth = 1.8;
+        ctx.strokeStyle = cssVar('--gold');
+        ctx.beginPath();
+        ctx.arc(sx,sy,Math.max(2,r)+3,0,Math.PI*2);
+        ctx.stroke();
+      }
+      if (selected && n.id === selected.id) {
+        ctx.lineWidth = 2.4;
+        ctx.strokeStyle = cssVar('--chalk');
+        ctx.beginPath();
+        ctx.arc(sx,sy,Math.max(2,r)+6,0,Math.PI*2);
+        ctx.stroke();
+      }
+    }
+
+    // labels
+    if (n.isDomain || r > 9) {
+      ctx.fillStyle = n.isDomain ? cssVar('--chalk') : cssVar('--board');
+      ctx.font = n.isDomain ? `italic 600 ${Math.min(17,13+camera.zoom)}px ${getComputedStyle(root).getPropertyValue('--serif')}` : `600 ${Math.max(8,Math.min(11,r*0.5))}px ${getComputedStyle(root).getPropertyValue('--mono')}`;
+      ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      const label = n.isDomain ? `${n.label}` : (n.label || n.leaf || '');
+      if (n.isDomain) {
+        ctx.fillText(label, sx, sy-6);
+        ctx.font = `10px ${getComputedStyle(root).getPropertyValue('--mono')}`;
+        ctx.fillStyle = cssVar('--chalk-faint');
+        ctx.fillText(`${n.count} files`, sx, sy+10);
+      } else if (n.isFamily) {
+        ctx.fillStyle = cssVar('--chalk');
+        ctx.fillText(label, sx, sy);
+      }
+    }
+  });
+
+  renderHint();
+}
+
+function renderHint() {
+  const hint = document.getElementById('hint');
+  if (view.level === 'overview') {
+    hint.textContent = 'Click a domain to explore its theorems. Bubble size = file count; connecting lines = cross-domain dependency weight.';
+  } else {
+    hint.textContent = 'Dashed rings = collapsed mechanical families (click to expand). Gold halo = headline result.';
+  }
+}
+
+/* ---------------------------------------------------------------- interaction */
+let hoverNode = null;
+function nodeAt(mx,my) {
+  const [wx,wy] = screenToWorld(mx,my);
+  let best = null, bestD = Infinity;
+  for (const n of currentDraw.nodes) {
+    const dx = n.x-wx, dy = n.y-wy;
+    const d = Math.sqrt(dx*dx+dy*dy);
+    if (d < n.r + 4/camera.zoom && d < bestD) { best = n; bestD = d; }
+  }
+  return best;
+}
+
+canvas.addEventListener('mousedown', e => {
+  const n = nodeAt(e.offsetX, e.offsetY);
+  if (n) return; // let click handler deal with node clicks
+  dragging = { x: e.clientX, y: e.clientY, cx: camera.x, cy: camera.y };
+  canvas.classList.add('dragging');
+});
+window.addEventListener('mousemove', e => {
+  if (dragging) {
+    camera.x = dragging.cx - (e.clientX-dragging.x)/camera.zoom;
+    camera.y = dragging.cy - (e.clientY-dragging.y)/camera.zoom;
+    draw();
+  }
+});
+window.addEventListener('mouseup', () => { dragging = null; canvas.classList.remove('dragging'); });
+
+canvas.addEventListener('mousemove', e => {
+  const n = nodeAt(e.offsetX, e.offsetY);
+  const tip = document.getElementById('tooltip');
+  if (n && !dragging) {
+    hoverNode = n;
+    canvas.style.cursor = 'pointer';
+    tip.style.display = 'block';
+    tip.style.left = (e.offsetX+14)+'px';
+    tip.style.top = (e.offsetY+10)+'px';
+    if (n.isDomain) {
+      tip.innerHTML = `<div class="t-name">${n.label}</div><div class="t-meta">${n.count} files</div>`;
+    } else if (n.isFamily) {
+      tip.innerHTML = `<div class="t-name">${n.label}</div><div class="t-meta">${n.count} mechanically-generated sub-cases — click to expand</div>`;
+    } else {
+      tip.innerHTML = `<div class="t-name">${n.leaf}</div><div class="t-meta">${n.declarations.length} declaration(s) · ${TIER_META[n.axiomTier].label} · in ${n.inDegree} / out ${n.outDegree}</div>`;
+    }
+  } else {
+    hoverNode = null;
+    tip.style.display = 'none';
+    canvas.style.cursor = dragging ? 'grabbing' : 'grab';
+  }
+});
+
+canvas.addEventListener('wheel', e => {
+  e.preventDefault();
+  const factor = Math.exp(-e.deltaY * 0.0012);
+  camera.zoom = Math.max(0.15, Math.min(4, camera.zoom * factor));
+  draw();
+}, { passive: false });
+
+canvas.addEventListener('click', e => {
+  const n = nodeAt(e.offsetX, e.offsetY);
+  if (!n) return;
+  if (n.isDomain) {
+    view = { level: 'domain', domain: n.domain };
+    camera = { x:0, y:0, zoom: 0.85 };
+    selected = null; closePanel();
+    renderBreadcrumb(); draw();
+    return;
+  }
+  if (n.isFamily) {
+    // expand: zoom toward it and temporarily disable collapse for this render pass by selecting a member
+    openFamilyPanel(n);
+    return;
+  }
+  selected = n;
+  openPanel(n);
+  draw();
+});
+
+/* ---------------------------------------------------------------- drilldown panel */
+function closePanel() {
+  document.getElementById('panel').classList.remove('open');
+  document.getElementById('panel').innerHTML = '<div class="empty">Click any node to inspect it.</div>';
+}
+
+function escapeHtml(s) {
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+function mdLite(text) {
+  if (!text) return '';
+  return text.split(/\n{2,}/).map(block => {
+    const t = block.trim();
+    if (/^#{1,4}\s/.test(t)) {
+      return `<div class="p-doc-h">${inlineMd(t.replace(/^#{1,4}\s/, ''))}</div>`;
+    }
+    if (/^([*-]\s.+\n?)+$/.test(t)) {
+      const items = t.split(/\n/).map(l => `<li>${inlineMd(l.replace(/^[*-]\s/, ''))}</li>`).join('');
+      return `<ul class="p-doc-ul">${items}</ul>`;
+    }
+    return `<p>${inlineMd(t)}</p>`;
+  }).join('');
+}
+function inlineMd(s) {
+  s = escapeHtml(s);
+  s = s.replace(/`([^`]+)`/g, '<code>$1</code>');
+  s = s.replace(/\*\*([^*]+)\*\*/g, '<b>$1</b>');
+  return s;
+}
+
+function tierBadge(tier) {
+  return `<span class="p-tier" style="background:${tierColor(tier)}22;color:${tierColor(tier)};border:1px solid ${tierColor(tier)}66">${TIER_META[tier].label}</span>`;
+}
+
+function openFamilyPanel(fam) {
+  const panel = document.getElementById('panel');
+  panel.classList.add('open');
+  const rows = fam.members.map(m => `<li><a data-goto="${m.id}">${m.leaf}</a></li>`).join('');
+  panel.innerHTML = `
+    <button class="close" onclick="closePanel()">×</button>
+    <div class="p-path">mechanical family</div>
+    <h2>${fam.label}</h2>
+    ${tierBadge(fam.axiomTier)}
+    <div class="p-family-note">${fam.count} files sharing a common stem and a near-identical proof shape (a generated case split). Grouped here to keep the map legible — expand below to jump to any individual case.</div>
+    <div class="p-section"><h3>Members</h3><ul class="p-link-list">${rows}</ul></div>
+  `;
+  panel.querySelectorAll('[data-goto]').forEach(a => a.onclick = () => {
+    const target = nodesById.get(a.dataset.goto);
+    if (target) { selected = target; openPanel(target); }
+  });
+}
+
+function openPanel(n) {
+  const panel = document.getElementById('panel');
+  panel.classList.add('open');
+  const declRows = n.declarations.length ? n.declarations.map(d => {
+    const ax = n.declAxioms[d];
+    return `<li>${d}${ax ? `<span class="p-ax">↳ [${ax.join(', ')}]</span>` : ''}</li>`;
+  }).join('') : '<li style="color:var(--chalk-faint)">none parsed</li>';
+
+  const deps = n.imports.map(id => nodesById.get(id)).filter(Boolean);
+  const dependents = GRAPH.edges.filter(e => e.to === n.id).map(e => nodesById.get(e.from)).filter(Boolean);
+
+  const linkList = (arr) => arr.length
+    ? `<ul class="p-link-list">${arr.map(m => `<li><a data-goto="${m.id}">${m.id.replace('Propositio.','')}</a></li>`).join('')}</ul>`
+    : '<div style="color:var(--chalk-faint);font-size:.78rem">none</div>';
+
+  panel.innerHTML = `
+    <button class="close" onclick="closePanel()">×</button>
+    <div class="p-path">${n.path}</div>
+    <h2>${n.leaf}</h2>
+    ${tierBadge(n.axiomTier)} ${n.headline ? '<span class="p-tier" style="background:var(--gold)22;color:var(--gold);border:1px solid var(--gold)66">headline</span>' : ''}
+    ${n.status ? `<div style="font-size:.78rem;color:var(--chalk-dim);margin-top:.3rem"><b>Status:</b> ${n.status}</div>` : ''}
+    ${n.source ? `<div style="font-size:.78rem;color:var(--chalk-dim);margin-top:.15rem"><b>Source:</b> ${n.source}</div>` : ''}
+    <div class="p-section">
+      <h3>Module note</h3>
+      <div class="p-doc">${n.docstring ? mdLite(n.docstring.slice(0,1600)) : '<span style="font-style:italic">(no module docstring)</span>'}</div>
+    </div>
+    <div class="p-section">
+      <h3>Declarations (${n.declarations.length})</h3>
+      <ul class="p-decl-list">${declRows}</ul>
+    </div>
+    <div class="p-section">
+      <h3>Depends on (${deps.length})</h3>
+      ${linkList(deps)}
+    </div>
+    <div class="p-section">
+      <h3>Depended on by (${dependents.length})</h3>
+      ${linkList(dependents)}
+    </div>
+  `;
+  panel.querySelectorAll('[data-goto]').forEach(a => a.onclick = () => {
+    const target = nodesById.get(a.dataset.goto);
+    if (target) {
+      if (target.domain !== view.domain) { view = {level:'domain', domain: target.domain}; invalidateLayout(); }
+      selected = target; openPanel(target); draw();
+    }
+  });
+}
+window.closePanel = closePanel;
+
+/* ---------------------------------------------------------------- boot */
+renderHeaderStats();
+renderLegend();
+renderTierFilters();
+renderDomainFilters();
+renderBreadcrumb();
+resize();
+</script>
