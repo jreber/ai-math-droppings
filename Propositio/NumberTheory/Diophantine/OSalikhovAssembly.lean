@@ -2,8 +2,8 @@ import Propositio.NumberTheory.Diophantine.OSalikhovHwInterface
 import Propositio.NumberTheory.Diophantine.OSalikhovHdetInterface
 import Propositio.NumberTheory.Diophantine.OSalikhovHsmallSharper
 import Propositio.NumberTheory.Diophantine.OSalikhovTwoLog
-import Propositio.Collatz.PowGapCapstone22
-import Propositio.Collatz.PowGapMeasureBridge
+import Propositio.NumberTheory.Collatz.PowGapCapstone22
+import Propositio.NumberTheory.Collatz.PowGapMeasureBridge
 
 /-!
 # Conditional assembly: the full interface from exactly the two genuine inputs

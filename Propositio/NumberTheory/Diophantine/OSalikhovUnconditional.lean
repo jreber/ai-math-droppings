@@ -3,8 +3,8 @@ import Propositio.NumberTheory.Diophantine.OSalikhovHdvdExplicit
 import Propositio.NumberTheory.Diophantine.OSalikhovDecomp
 import Propositio.NumberTheory.Diophantine.OSalikhovGCoeff
 import Propositio.NumberTheory.Diophantine.OSalikhovIntCoord
-import Propositio.Collatz.Chebyshev30LcmAll
-import Propositio.Collatz.PowGapOfHdvd
+import Propositio.NumberTheory.Collatz.Chebyshev30LcmAll
+import Propositio.NumberTheory.Collatz.PowGapOfHdvd
 import Propositio.NumberTheory.Diophantine.OSalikhovMeasureOfHdvd
 import Mathlib
 

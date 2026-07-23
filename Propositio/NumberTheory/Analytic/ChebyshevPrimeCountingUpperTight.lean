@@ -1,5 +1,5 @@
-import Propositio.Collatz.Chebyshev30ThetaTight
-import Propositio.Collatz.Chebyshev30Aentropy
+import Propositio.NumberTheory.Collatz.Chebyshev30ThetaTight
+import Propositio.NumberTheory.Collatz.Chebyshev30Aentropy
 import Propositio.NumberTheory.Analytic.ChebyshevPrimeCountingLower
 import Mathlib.NumberTheory.Chebyshev
 import Mathlib.NumberTheory.PrimeCounting

@@ -72,3 +72,30 @@ also requires updating `CLAUDE.md`'s protocol (gate scripts, `Verify.lean`, the 
 research loop's definition-of-done) plus 743 KB `docs/kb/frontier/*.json` `"file"` pointers that
 currently reference `lean4/...` paths. Deliberately left as a follow-up decision for a session
 where a human can review it, not executed unsupervised.
+
+## Pass 3 — 2026-07-23 (taxonomy fix: nest Collatz/Beal under NumberTheory)
+
+Pass 2 gave `Collatz` and `Beal` top-level sibling status to `NumberTheory` itself — purely
+because of file count (232 + 132 of 584), not a real classification principle. Caught in review:
+mathlib's own convention nests everything problem-specific *inside* the field it belongs to
+(exactly how `Zsygmondy`/`ErdosStraus`/`Diophantine`/`Analytic` were already correctly nested);
+Collatz and Beal are specific problems within number theory, not their own fields, same as those.
+Fixed: `Propositio/Collatz/` → `Propositio/NumberTheory/Collatz/`,
+`Propositio/Beal/` → `Propositio/NumberTheory/Beal/`.
+
+Consequence worth knowing: Lean's `.olean` cache is keyed by module path, so this rename
+invalidated the cache for all 364 moved files and required a full rebuild under the new paths
+(same leaf-first batching pattern as pass 2's heavy-family build, reused via a renamed copy of
+the same module list — see `scripts/audit_axioms.py`'s neighbor script for the pattern if you
+need to repeat this for another rename). Final state unchanged otherwise: still 552/584 verified
+clean, same 32 exclusions (renamed).
+
+Also surfaced a second-order UX problem the rename exposed: with `Collatz`/`Beal` merged in,
+`NumberTheory` alone became 529 of 584 files (91%) — one domain bubble dominating the overview
+to the point of being useless as a map. Fixed in the explorer's own domain-grouping logic
+(`export_graph.py`): the overview now groups by the *second* path segment specifically under
+`NumberTheory` (`NumberTheory.Collatz`, `NumberTheory.Beal`, `NumberTheory.Diophantine`, etc.)
+rather than collapsing all of it to one bubble, while every other top-level area (`Combinatorics`,
+`Geometry`, ...) still groups at the first segment as before. This is `NumberTheory`-specific
+(hardcoded) rather than a fully general "expand any oversized domain" rule — revisit if another
+area grows large enough to need the same treatment.

@@ -144,8 +144,18 @@ def main():
 
     nodes = []
     for p in parsed:
+        # "domain" = the grouping used for the overview map. Normally the first path segment
+        # (Propositio.<X>.leaf -> X), but NumberTheory alone has real further subdivision
+        # (Collatz/Beal/Diophantine/Analytic/Zsygmondy/ErdosStraus each with 30-230+ files) --
+        # grouping all of it as one "NumberTheory" bubble would swallow ~90% of the library
+        # into one illegible node, so it goes one level deeper there specifically.
         domain_parts = p["module"].split(".")
-        domain = domain_parts[1] if len(domain_parts) > 1 else "Propositio"
+        if len(domain_parts) > 1 and domain_parts[1] == "NumberTheory" and len(domain_parts) > 3:
+            domain = "NumberTheory." + domain_parts[2]
+        elif len(domain_parts) > 1:
+            domain = domain_parts[1]
+        else:
+            domain = "Propositio"
         # axiom tier: worst across declarations we have log data for
         decl_axioms = {d: theorem_axioms[d] for d in p["declarations"] if d in theorem_axioms}
         # also match qualified names (Namespace.decl) since docs use short names

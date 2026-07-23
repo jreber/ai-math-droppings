@@ -1,125 +1,125 @@
-import Propositio.Beal.Density
-import Propositio.Collatz.FractalEscape
-import Propositio.Beal.Eisenstein
-import Propositio.Beal.CubeDescent
-import Propositio.Beal.ModEight
-import Propositio.Beal.Polynomial
-import Propositio.Beal.PolynomialFull
-import Propositio.Beal.Radical
-import Propositio.Beal.CubeDescentThree
-import Propositio.Beal.ABCFinite
-import Propositio.Beal.EisensteinDescent
-import Propositio.Beal.CubeMod9
-import Propositio.Beal.CubeSynthesis
-import Propositio.Beal.CubeDescentStep
-import Propositio.Beal.PrimeDescent
-import Propositio.Beal.KummerSign
-import Propositio.Beal.ABCFiniteFull
-import Propositio.Beal.Diagonal
-import Propositio.Beal.CyclotomicFactor
-import Propositio.Beal.ABCQuality
-import Propositio.Beal.Reduction
-import Propositio.Beal.LambdaResidue
-import Propositio.Beal.FreyCurve
-import Propositio.Beal.FreyGeneral
-import Propositio.Beal.FreyRadical
-import Propositio.Beal.ABCFermat
-import Propositio.Beal.FreyJ
-import Propositio.Beal.CubeSplitPrime
-import Propositio.Beal.RadicalAPI
-import Propositio.Beal.Frey23
-import Propositio.Beal.CombinedObstruction
-import Propositio.Beal.CubeCapstone
-import Propositio.Beal.Frey23Radical
-import Propositio.Beal.FreyReduction
-import Propositio.Beal.PrimeDescentFive
-import Propositio.Beal.Frey23Quality
-import Propositio.Collatz.Cycles
-import Propositio.Beal.PrimeDescentFiveFull
-import Propositio.Beal.PrimeDescentHigher
-import Propositio.Beal.FiveStructure
-import Propositio.Beal.ABC23
-import Propositio.Beal.FreyInvariants
-import Propositio.Beal.CyclotomicDescent
-import Propositio.Beal.FifthPower
-import Propositio.Beal.FermatCatalanABC
-import Propositio.Beal.SplitPrimeGeneral
-import Propositio.Collatz.Lyapunov
-import Propositio.Collatz.LyapunovCascade
-import Propositio.Beal.ExponentImage
-import Propositio.Collatz.Modular
-import Propositio.Collatz.H5
-import Propositio.Collatz.ParityVector
-import Propositio.Beal.CountingStages
-import Propositio.Beal.Misc
-import Propositio.Beal.DensityGeneral
-import Propositio.Beal.DensityKVar
-import Propositio.Beal.UnitsDensity
-import Propositio.Beal.UnitsDensityGeneral
-import Propositio.Beal.TwoDensity
-import Propositio.Beal.TwoAdicIso
-import Propositio.Beal.UnitsDensityFull
-import Propositio.Beal.UnitsDensityKVar
-import Propositio.Beal.UnitsDensityKVarGen
-import Propositio.Beal.PPZCapstone
-import Propositio.Collatz.HigherCycles
-import Propositio.Beal.LambdaInterface
-import Propositio.Beal.SplitPrimeDensity
-import Propositio.Beal.TwoThreeLocal
-import Propositio.Collatz.DescentDensity
-import Propositio.Collatz.CascadeCycles
-import Propositio.Beal.LocalCRT
-import Propositio.Collatz.ValuationDensity
-import Propositio.Beal.FiveUnitInterface
-import Propositio.Beal.HasseIndex
-import Propositio.Beal.FiveRealReduction
-import Propositio.Beal.CyclotomicUnitIndex
-import Propositio.Beal.SevenUnitIndex
-import Propositio.Beal.SevenRealReduction
-import Propositio.Collatz.Drift
-import Propositio.Beal.SevenPID
-import Propositio.Beal.SevenCapstone
-import Propositio.Collatz.StoppingF3
-import Propositio.Collatz.StoppingF4
-import Propositio.Collatz.BadDensity
-import Propositio.Beal.CubeMasterCapstone
-import Propositio.Beal.HigherMasterCapstone
-import Propositio.Collatz.StoppingF56
-import Propositio.Collatz.ParityBijection
-import Propositio.Beal.TwoThreeMasterCapstone
-import Propositio.Collatz.DensityCount
-import Propositio.Collatz.NonDescentWeight
-import Propositio.Collatz.BinomialTail
-import Propositio.Collatz.TailDecayUncond
-import Propositio.Collatz.DescentDichotomy
-import Propositio.Collatz.StoppingCompare
-import Propositio.Collatz.PowGapReduce
-import Propositio.Collatz.ShortCycleExclusion
-import Propositio.Collatz.ThreeCycleExclusion
-import Propositio.Collatz.CycleTelescope
-import Propositio.Collatz.CycleCapstone
-import Propositio.Collatz.Chebyshev30PadicM
-import Propositio.Collatz.CycleDecide
-import Propositio.Collatz.CycleUniform
-import Propositio.Collatz.CycleEnum
-import Propositio.Collatz.NineCycle
-import Propositio.Collatz.Convergence
-import Propositio.Beal.FLTFamilies
-import Propositio.Beal.FourthPowerLocal
-import Propositio.Beal.ThreeFourLocal
-import Propositio.Beal.FifthMixedLocal
-import Propositio.Beal.LocalSolubility
-import Propositio.Beal.MixedSignatureGeneral
-import Propositio.Beal.TwoFourLocal
-import Propositio.Beal.FiniteRegion
-import Propositio.Collatz.AlmostAllDescend
-import Propositio.Collatz.AlmostAllDescendUncond
-import Propositio.Collatz.CoeffStopping
-import Propositio.Beal.FiveRealSubfieldIso
-import Propositio.Beal.GoldenMinPoly
-import Propositio.Beal.SevenRealSubfield
-import Propositio.Beal.SevenMinPoly
-import Propositio.Collatz.ResidueDescent
+import Propositio.NumberTheory.Beal.Density
+import Propositio.NumberTheory.Collatz.FractalEscape
+import Propositio.NumberTheory.Beal.Eisenstein
+import Propositio.NumberTheory.Beal.CubeDescent
+import Propositio.NumberTheory.Beal.ModEight
+import Propositio.NumberTheory.Beal.Polynomial
+import Propositio.NumberTheory.Beal.PolynomialFull
+import Propositio.NumberTheory.Beal.Radical
+import Propositio.NumberTheory.Beal.CubeDescentThree
+import Propositio.NumberTheory.Beal.ABCFinite
+import Propositio.NumberTheory.Beal.EisensteinDescent
+import Propositio.NumberTheory.Beal.CubeMod9
+import Propositio.NumberTheory.Beal.CubeSynthesis
+import Propositio.NumberTheory.Beal.CubeDescentStep
+import Propositio.NumberTheory.Beal.PrimeDescent
+import Propositio.NumberTheory.Beal.KummerSign
+import Propositio.NumberTheory.Beal.ABCFiniteFull
+import Propositio.NumberTheory.Beal.Diagonal
+import Propositio.NumberTheory.Beal.CyclotomicFactor
+import Propositio.NumberTheory.Beal.ABCQuality
+import Propositio.NumberTheory.Beal.Reduction
+import Propositio.NumberTheory.Beal.LambdaResidue
+import Propositio.NumberTheory.Beal.FreyCurve
+import Propositio.NumberTheory.Beal.FreyGeneral
+import Propositio.NumberTheory.Beal.FreyRadical
+import Propositio.NumberTheory.Beal.ABCFermat
+import Propositio.NumberTheory.Beal.FreyJ
+import Propositio.NumberTheory.Beal.CubeSplitPrime
+import Propositio.NumberTheory.Beal.RadicalAPI
+import Propositio.NumberTheory.Beal.Frey23
+import Propositio.NumberTheory.Beal.CombinedObstruction
+import Propositio.NumberTheory.Beal.CubeCapstone
+import Propositio.NumberTheory.Beal.Frey23Radical
+import Propositio.NumberTheory.Beal.FreyReduction
+import Propositio.NumberTheory.Beal.PrimeDescentFive
+import Propositio.NumberTheory.Beal.Frey23Quality
+import Propositio.NumberTheory.Collatz.Cycles
+import Propositio.NumberTheory.Beal.PrimeDescentFiveFull
+import Propositio.NumberTheory.Beal.PrimeDescentHigher
+import Propositio.NumberTheory.Beal.FiveStructure
+import Propositio.NumberTheory.Beal.ABC23
+import Propositio.NumberTheory.Beal.FreyInvariants
+import Propositio.NumberTheory.Beal.CyclotomicDescent
+import Propositio.NumberTheory.Beal.FifthPower
+import Propositio.NumberTheory.Beal.FermatCatalanABC
+import Propositio.NumberTheory.Beal.SplitPrimeGeneral
+import Propositio.NumberTheory.Collatz.Lyapunov
+import Propositio.NumberTheory.Collatz.LyapunovCascade
+import Propositio.NumberTheory.Beal.ExponentImage
+import Propositio.NumberTheory.Collatz.Modular
+import Propositio.NumberTheory.Collatz.H5
+import Propositio.NumberTheory.Collatz.ParityVector
+import Propositio.NumberTheory.Beal.CountingStages
+import Propositio.NumberTheory.Beal.Misc
+import Propositio.NumberTheory.Beal.DensityGeneral
+import Propositio.NumberTheory.Beal.DensityKVar
+import Propositio.NumberTheory.Beal.UnitsDensity
+import Propositio.NumberTheory.Beal.UnitsDensityGeneral
+import Propositio.NumberTheory.Beal.TwoDensity
+import Propositio.NumberTheory.Beal.TwoAdicIso
+import Propositio.NumberTheory.Beal.UnitsDensityFull
+import Propositio.NumberTheory.Beal.UnitsDensityKVar
+import Propositio.NumberTheory.Beal.UnitsDensityKVarGen
+import Propositio.NumberTheory.Beal.PPZCapstone
+import Propositio.NumberTheory.Collatz.HigherCycles
+import Propositio.NumberTheory.Beal.LambdaInterface
+import Propositio.NumberTheory.Beal.SplitPrimeDensity
+import Propositio.NumberTheory.Beal.TwoThreeLocal
+import Propositio.NumberTheory.Collatz.DescentDensity
+import Propositio.NumberTheory.Collatz.CascadeCycles
+import Propositio.NumberTheory.Beal.LocalCRT
+import Propositio.NumberTheory.Collatz.ValuationDensity
+import Propositio.NumberTheory.Beal.FiveUnitInterface
+import Propositio.NumberTheory.Beal.HasseIndex
+import Propositio.NumberTheory.Beal.FiveRealReduction
+import Propositio.NumberTheory.Beal.CyclotomicUnitIndex
+import Propositio.NumberTheory.Beal.SevenUnitIndex
+import Propositio.NumberTheory.Beal.SevenRealReduction
+import Propositio.NumberTheory.Collatz.Drift
+import Propositio.NumberTheory.Beal.SevenPID
+import Propositio.NumberTheory.Beal.SevenCapstone
+import Propositio.NumberTheory.Collatz.StoppingF3
+import Propositio.NumberTheory.Collatz.StoppingF4
+import Propositio.NumberTheory.Collatz.BadDensity
+import Propositio.NumberTheory.Beal.CubeMasterCapstone
+import Propositio.NumberTheory.Beal.HigherMasterCapstone
+import Propositio.NumberTheory.Collatz.StoppingF56
+import Propositio.NumberTheory.Collatz.ParityBijection
+import Propositio.NumberTheory.Beal.TwoThreeMasterCapstone
+import Propositio.NumberTheory.Collatz.DensityCount
+import Propositio.NumberTheory.Collatz.NonDescentWeight
+import Propositio.NumberTheory.Collatz.BinomialTail
+import Propositio.NumberTheory.Collatz.TailDecayUncond
+import Propositio.NumberTheory.Collatz.DescentDichotomy
+import Propositio.NumberTheory.Collatz.StoppingCompare
+import Propositio.NumberTheory.Collatz.PowGapReduce
+import Propositio.NumberTheory.Collatz.ShortCycleExclusion
+import Propositio.NumberTheory.Collatz.ThreeCycleExclusion
+import Propositio.NumberTheory.Collatz.CycleTelescope
+import Propositio.NumberTheory.Collatz.CycleCapstone
+import Propositio.NumberTheory.Collatz.Chebyshev30PadicM
+import Propositio.NumberTheory.Collatz.CycleDecide
+import Propositio.NumberTheory.Collatz.CycleUniform
+import Propositio.NumberTheory.Collatz.CycleEnum
+import Propositio.NumberTheory.Collatz.NineCycle
+import Propositio.NumberTheory.Collatz.Convergence
+import Propositio.NumberTheory.Beal.FLTFamilies
+import Propositio.NumberTheory.Beal.FourthPowerLocal
+import Propositio.NumberTheory.Beal.ThreeFourLocal
+import Propositio.NumberTheory.Beal.FifthMixedLocal
+import Propositio.NumberTheory.Beal.LocalSolubility
+import Propositio.NumberTheory.Beal.MixedSignatureGeneral
+import Propositio.NumberTheory.Beal.TwoFourLocal
+import Propositio.NumberTheory.Beal.FiniteRegion
+import Propositio.NumberTheory.Collatz.AlmostAllDescend
+import Propositio.NumberTheory.Collatz.AlmostAllDescendUncond
+import Propositio.NumberTheory.Collatz.CoeffStopping
+import Propositio.NumberTheory.Beal.FiveRealSubfieldIso
+import Propositio.NumberTheory.Beal.GoldenMinPoly
+import Propositio.NumberTheory.Beal.SevenRealSubfield
+import Propositio.NumberTheory.Beal.SevenMinPoly
+import Propositio.NumberTheory.Collatz.ResidueDescent
 
 -- Axiom audit: clean theorems depend ONLY on [propext, Classical.choice, Quot.sound].
 -- Any `sorryAx` or project axiom would surface here.
@@ -478,11 +478,11 @@ import Propositio.NumberTheory.Diophantine.OSalikhovUnconditional
 #print axioms OSalikhovUnconditional.collatz_powGap_unconditional
 #print axioms OSalikhovUnconditional.osalikhov_logb23_measure_unconditional
 -- 2026-06-26: Kummer p=5 torsion absorption (breaking-monoculture route, NOT Baker-class)
-import Propositio.Beal.KummerTorsionAbsorb5
+import Propositio.NumberTheory.Beal.KummerTorsionAbsorb5
 #print axioms BealKummerTorsionAbsorb5.zeta5_isPow_of_coprime
 #print axioms BealKummerTorsionAbsorb5.kummer_absorb_zeta_pow_5
 -- 2026-06-26: Ring-of-integers basis for K⁺=ℚ(ζ₅)⁺: Eisenstein at ⟨5⟩ + descent congruence
-import Propositio.Beal.RingOfIntegersBasisKPlus
+import Propositio.NumberTheory.Beal.RingOfIntegersBasisKPlus
 #print axioms BealRingOfIntegersBasisKPlus.eta0_poly_of_golden
 #print axioms BealRingOfIntegersBasisKPlus.eta0_poly_cyclotomic
 #print axioms BealRingOfIntegersBasisKPlus.eta0Poly_isEisenstein
@@ -494,7 +494,7 @@ import Propositio.Beal.RingOfIntegersBasisKPlus
 
 -- 2026-06-27: Clean (native_decide-FREE) Collatz descent-density floor 63/64 (all k≥78),
 -- and the descent density limit = 1. Supersedes the native_decide 245/256 floor.
-import Propositio.Collatz.DescentDensityCleanFloor
+import Propositio.NumberTheory.Collatz.DescentDensityCleanFloor
 #print axioms CollatzDescentDensityCleanFloor.descBy_density_ge_63_64
 #print axioms CollatzDescentDensityCleanFloor.collatz_descent_density_tendsto_one
 -- 2026-06-27: definitive clean floor → 1 (arbitrary p/q < 1).
@@ -506,12 +506,12 @@ import Propositio.NumberTheory.Diophantine.Log43MeasureExplicit
 
 -- 2026-06-27: Terras-1976 headline — the set {n : finite Terras stopping time} has
 -- natural density 1 (single-set, Tendsto (count/N) → 1). Unconditional, axiom-clean.
-import Propositio.Collatz.StoppingDensityOne
+import Propositio.NumberTheory.Collatz.StoppingDensityOne
 #print axioms CollatzStoppingDensityOne.stopFinite_density_tendsto_one
 #print axioms CollatzStoppingDensityOne.stopFinite_density_bounded_below
 -- 2026-06-29: complement Terras theorem — the set {n : NO finite Terras stopping time} has
 -- natural density 0 (count_upto(¬StopFinite)/N → 0). Complement of the density-1 headline. Gate+panel.
-import Propositio.Collatz.StoppingComplDensity
+import Propositio.NumberTheory.Collatz.StoppingComplDensity
 #print axioms CollatzStoppingComplDensity.stopFinite_compl_density_tendsto_zero
 
 -- 2026-06-27: Chebyshev's LOWER bounds c·x ≤ ψ x and (large x) c·x ≤ θ x — a genuine
@@ -590,13 +590,13 @@ import Propositio.NumberTheory.Analytic.MertensReciprocalUpper
 
 -- 2026-06-27: log-density transfer (Tao framing): natural-density 1 ⇒ logarithmic-density 1,
 -- and its corollary that the Terras finite-stopping-time set has logarithmic density 1.
-import Propositio.Collatz.LogDensityTransfer
+import Propositio.NumberTheory.Collatz.LogDensityTransfer
 #print axioms LogDensityTransfer.natDensity_one_imp_logDensity_one
 #print axioms CollatzStoppingDensityOne.stopFinite_logDensity_tendsto_one
 
 -- 2026-06-27: Syracuse 3-adic bias (elementary seed of Tao's Syracuse-distribution program):
 -- for the Syracuse map Syr N = oddpart(3N+1), Syr N ≡ (-1)^v₂(3N+1) (mod 3); residue 1/2, never 0.
-import Propositio.Collatz.SyracuseThreeAdicBias
+import Propositio.NumberTheory.Collatz.SyracuseThreeAdicBias
 #print axioms SyracuseThreeAdicBias.Syr_mod_three
 #print axioms SyracuseThreeAdicBias.Syr_mod_three_eq
 #print axioms SyracuseThreeAdicBias.Syr_not_dvd_three
@@ -608,14 +608,14 @@ import Propositio.NumberTheory.Analytic.MertensProductLower
 
 -- 2026-06-27: Syracuse valuation distribution — #{N<2^K : v₂(3N+1)=j} = 2^(K-j-1) (geometric);
 -- exactly one residue per period. Links the 3-adic-bias geometric masses to the actual map.
-import Propositio.Collatz.SyracuseValuationDistribution
+import Propositio.NumberTheory.Collatz.SyracuseValuationDistribution
 #print axioms SyracuseValuationDistribution.card_valuation_eq
 #print axioms SyracuseValuationDistribution.card_valuation_eq_one_per_period
 #print axioms SyracuseValuationDistribution.density_valuation_eq
 
 -- 2026-06-27: Syracuse 2:1 residue-bias CAPSTONE — among odd N, #{Syr≡2}/#{Syr≡1} → 2.
 -- Combines Syr_mod_three_eq + card_valuation_eq; honest ±1 boundary, genuine limit.
-import Propositio.Collatz.SyracuseResidueBias
+import Propositio.NumberTheory.Collatz.SyracuseResidueBias
 #print axioms SyracuseResidueBias.residue_bias_two_to_one
 #print axioms SyracuseResidueBias.Aodd_add_Bodd
 
@@ -650,23 +650,23 @@ import Propositio.NumberTheory.Analytic.PrimeFactorAverage
 
 -- 2026-06-27: Syracuse dynamics bundle (breaking-monoculture collatz-dynamics seeds).
 -- Fixed point: only fixed point of the Syracuse map is 1.
-import Propositio.Collatz.SyracuseFixedPoint
+import Propositio.NumberTheory.Collatz.SyracuseFixedPoint
 #print axioms SyracuseThreeAdicBias.Syr_fixed_point_iff_one
 -- No nontrivial 2-cycle: Syr(Syr n)=n ↔ n=1 (for odd n).
-import Propositio.Collatz.SyracuseNoTwoCycle
+import Propositio.NumberTheory.Collatz.SyracuseNoTwoCycle
 #print axioms SyracuseNoTwoCycle.Syr_two_cycle_iff_one
 -- Image = odds not divisible by 3: every such t has an odd preimage.
-import Propositio.Collatz.SyracuseImage
+import Propositio.NumberTheory.Collatz.SyracuseImage
 #print axioms SyracuseThreeAdicBias.Syr_surjective_on_odd_not_three
 -- Maximal-growth family: Syr^[j](2^k−1) = 3^j·2^(k−j)−1 for j<k.
-import Propositio.Collatz.SyracuseMaxGrowth
+import Propositio.NumberTheory.Collatz.SyracuseMaxGrowth
 #print axioms SyracuseThreeAdicBias.Syr_iterate_mersenne
 
 -- 2026-06-27: Collatz residue-descent family member — n ≡ 23 (mod 32) ⟹ T⁵(n) < n.
-import Propositio.Collatz.Descent23
+import Propositio.NumberTheory.Collatz.Descent23
 #print axioms CollatzDescent23.descent_twentythree_mod_thirtytwo
 -- 2026-06-27: clean 2-adic valuation brick — n ≡ 3 (mod 4) ⟹ v₂(3n+1) = 1.
-import Propositio.Collatz.Val2Three
+import Propositio.NumberTheory.Collatz.Val2Three
 #print axioms padicValNat_two_three_mul_add_one_of_three_mod_four
 
 -- 2026-06-27: analytic-NT batch 2 (mathlib gaps). Möbius–Mertens floor identity Σ_{n≤N} μ(n)⌊N/n⌋ = 1,
@@ -721,11 +721,11 @@ import Propositio.NumberTheory.Analytic.DivisorDivSelfSummatory
 -- 2026-06-27: explicit TIGHT Chebyshev θ bound θ(x) ≤ (6(Aentropy+1/30)/5)·x + θ(57600),
 -- leading slope ≈1.1455 < 1.151, beating mathlib's theta_le_log4_mul_x (log4≈1.386). The
 -- analytic half of the Collatz prize Den wall (was "not in mathlib"). Gate + panel 4/4.
-import Propositio.Collatz.Chebyshev30ThetaTight
+import Propositio.NumberTheory.Collatz.Chebyshev30ThetaTight
 #print axioms CollatzChebyshev30.theta_tight
 -- 2026-06-27: tight period-30 lcm growth bound log(lcm(1..n)) ≤ (6·Aentropy/5)·n + subexp,
 -- leading slope ≈1.1055, replacing LcmGrowthBound.log_lcmUpto_le_sharp (log4). Gate + panel 4/4.
-import Propositio.Collatz.Chebyshev30LcmTight
+import Propositio.NumberTheory.Collatz.Chebyshev30LcmTight
 #print axioms CollatzChebyshev30.log_lcmUpto_le_cheb30_tight
 -- 2026-06-27 (unrecorded-headline sweep): Irrationality of log 2 via diagonal Legendre integral
 -- (single-log template for the log₂3 Collatz wall). Gate exit-0 + panel 4/4.
@@ -738,7 +738,7 @@ import Propositio.NumberTheory.Diophantine.OSalikhovPerfectSystem
 -- 2026-06-27 (sweep): general (p,p,z) cyclotomic descent — odd prime p, 𝓞K=ℤ[ζ_p] PID,
 -- primitive A^p+B^p=C^z with p∤(A+B) ⟹ A+B=s^z in ℤ AND A+B·ζ a z-th power up to a unit.
 -- λ-bridge derived (no λ-hypothesis). Gate exit-0 + panel 4/4.
-import Propositio.Beal.CyclotomicDescent
+import Propositio.NumberTheory.Beal.CyclotomicDescent
 #print axioms BealCyclotomicDescent.beal_ppz_structure_gen
 -- 2026-06-27 (sweep): general-p Kummer power-extraction — coprime A,B + λ∤(A+B) +
 -- perfect-power product ⟹ A+B·ζ is a z-th power up to a unit (factor/cofactor coprimality
@@ -746,50 +746,50 @@ import Propositio.Beal.CyclotomicDescent
 #print axioms BealCyclotomicDescent.cyclotomic_power_extraction_gen
 -- 2026-06-27 (sweep): fractal-escape hierarchy — for co(n)=(3n+1)/2, the nested 2-adic
 -- residues n≡2^(K+1)−1 [MOD 2^(K+2)] escape to co^[K] n ≡ 1 [MOD 4]. Gate exit-0 + panel 4/4.
-import Propositio.Collatz.FractalEscape
+import Propositio.NumberTheory.Collatz.FractalEscape
 #print axioms FractalEscape.fractal_escape_hierarchy_theorem
 -- 2026-06-27 (sweep): cube-sum (3,3,z) counterexample constraints — Eisenstein z-th-power
 -- descent + mod-7 cube-sum gap + z≠3 (FLT-3). Gate exit-0 + panel 4/4 (mod-7 conjunct is
 -- an unconditional fact, not counterexample-specific — descent & z≠3 carry the content).
-import Propositio.Beal.CubeCapstone
+import Propositio.NumberTheory.Beal.CubeCapstone
 #print axioms BealCubeCapstone.cube_sum_counterexample_constraints
 -- 2026-06-27 (sweep): named (5,5,z) Beal structure theorem (p=5 PID via five_pid) —
 -- A+B=s^z in ℤ AND A+B·ζ a z-th power up to a unit in ℤ[ζ₅]. Gate exit-0 + panel 4/4.
-import Propositio.Beal.FiveStructure
+import Propositio.NumberTheory.Beal.FiveStructure
 #print axioms BealFiveStructure.beal_55z_structure
 -- 2026-06-27 (sweep): core Eisenstein cube descent — coprime A,B + 3∤C + A^3+B^3=C^z ⟹
 -- A+B and A^2+B^2−AB are each perfect z-th powers, C their product. Gate exit-0 + panel 4/4.
-import Propositio.Beal.CubeDescent
+import Propositio.NumberTheory.Beal.CubeDescent
 #print axioms BealCubeDescent.cube_sum_descent
 -- 2026-06-27 (sweep): no nontrivial Syracuse cc-cycle of length ≤8 (cc(n)=(3n+1)/2^v₂(3n+1)),
 -- per-length kernel-decide exclusions (not native_decide). Gate exit-0 + panel 4/4.
-import Propositio.Collatz.CycleCapstone
+import Propositio.NumberTheory.Collatz.CycleCapstone
 #print axioms CollatzCycleCapstone.cc_no_nontrivial_cycle_le_eight
 -- 2026-06-27 (sweep): strongest Syracuse cycle exclusion — no nontrivial cc-cycle of length
 -- ≤10 (L=9 via CollatzNineCycle, L=10 via CollatzTenCycle; per-A kernel decide, 48620-comp
 -- heaviest at L=10). Subsumes ≤8/≤9. Gate exit-0 + panel 4/4.
-import Propositio.Collatz.TenCycle
+import Propositio.NumberTheory.Collatz.TenCycle
 #print axioms CollatzCycleCapstone.cc_no_nontrivial_cycle_le_ten
 -- 2026-06-28 (sweep): under A^3+B^3=C^z (z≠0), 3∣C ↔ 3∣(A+B) (cube-sum prime-3 descent
 -- equivalence via x^3≡x mod 3). Gate exit-0 + panel 4/4.
-import Propositio.Beal.CubeDescentThree
+import Propositio.NumberTheory.Beal.CubeDescentThree
 #print axioms BealCubeDescentThree.three_dvd_sum_iff
 -- 2026-06-28: no nontrivial Syracuse cc-cycle of length ≤11 (extends the ladder past ≤10;
 -- admissible A∈{18,19,20,21}, per-A kernel decide, landed via multi-file split + positional-
 -- bullet assemblies to bound compile RAM). Gate exit-0 + panel 4/4 on the L=11 core.
-import Propositio.Collatz.ElevenCycle
+import Propositio.NumberTheory.Collatz.ElevenCycle
 #print axioms CollatzElevenCycle.cc_no_nontrivial_eleven_cycle
-import Propositio.Collatz.CycleCapstone
+import Propositio.NumberTheory.Collatz.CycleCapstone
 #print axioms CollatzCycleCapstone.cc_no_nontrivial_cycle_le_eleven
 -- 2026-06-28: no nontrivial Syracuse cc-cycle of length ≤12 (extends the ladder past ≤11;
 -- admissible A∈{20,21,22,23}, ~1.3M-composition per-A kernel decide, landed via recursive
 -- multi-file split + positional-bullet assemblies to bound compile RAM). Gate exit-0 + panel.
-import Propositio.Collatz.TwelveCycle
+import Propositio.NumberTheory.Collatz.TwelveCycle
 #print axioms CollatzTwelveCycle.cc_no_nontrivial_twelve_cycle
 #print axioms CollatzCycleCapstone.cc_no_nontrivial_cycle_le_twelve
 -- 2026-06-28: no nontrivial Syracuse cc-cycle of length ≤13 (admissible A∈{21,22,23,24,25},
 -- ~5.1M-composition per-A kernel decide; same recursive-split recipe as ≤12). Gate + panel.
-import Propositio.Collatz.ThirteenCycle
+import Propositio.NumberTheory.Collatz.ThirteenCycle
 #print axioms CollatzThirteenCycle.cc_no_nontrivial_thirteen_cycle
 #print axioms CollatzCycleCapstone.cc_no_nontrivial_cycle_le_thirteen
 -- 2026-07-10: no nontrivial Syracuse cc-cycle of length 14, via the Simons–de
@@ -799,7 +799,7 @@ import Propositio.Collatz.ThirteenCycle
 -- (well-founded-recursion-free) two-adic valuation refutes all odd 1<n<678 as
 -- 14-fold cc-fixed-points. ~10s total kernel-decide time (vs. the abandoned
 -- ~20M-composition brute enumeration). Gate exit-0 + panel 4/4.
-import Propositio.Collatz.FourteenCycle
+import Propositio.NumberTheory.Collatz.FourteenCycle
 #print axioms CollatzFourteenCycle.cc_no_nontrivial_fourteen_cycle
 #print axioms CollatzCycleCapstone.cc_no_nontrivial_cycle_le_fourteen
 -- 2026-07-17: no nontrivial Syracuse cc-cycle of length 15, same element-bound
@@ -808,12 +808,12 @@ import Propositio.Collatz.FourteenCycle
 -- kernel `decide` refutes all odd 1<n<3020 as 15-fold cc-fixed-points --
 -- replaces the abandoned ~76M-composition brute enumeration. Gate exit-0 +
 -- panel 4/4.
-import Propositio.Collatz.FifteenCycle
+import Propositio.NumberTheory.Collatz.FifteenCycle
 #print axioms CollatzFifteenCycle.cc_no_nontrivial_fifteen_cycle
 #print axioms CollatzCycleCapstone.cc_no_nontrivial_cycle_le_fifteen
 -- 2026-06-27 (sweep): cyclotomic-5 conjugate-product ring identity ∏_{k=1}^4(A+Bζ^k)=Φ₅(A,B)
 -- in any CommRing from ζ^5=1 & Σζ^k=0 (linear_combination). Gate exit-0 + panel 4/4.
-import Propositio.Beal.CyclotomicNorm
+import Propositio.NumberTheory.Beal.CyclotomicNorm
 #print axioms BealCyclotomicNorm.cyclotomic5_conjugate_product
 -- 2026-07-05: explicit two-sided n-th prime bound c₁·n·log n ≤ pₙ ≤ c₂·n·log n
 -- (repackages NthPrimeGrowth.nth_prime_isTheta into usable inequality form)
@@ -824,13 +824,13 @@ import Propositio.NumberTheory.Diophantine.LiftingExponentTwo
 #print axioms LiftingExponentTwo.padicValNat_two_pow_sub_pow_of_odd
 #print axioms LiftingExponentTwo.padicValNat_two_pow_sub_pow_of_even
 -- 2026-07-05: Simons-de Weger element bound for cc-cycles (sharp form) + n < 6^L + finite-test reduction
-import Propositio.Collatz.CycleElementBound
+import Propositio.NumberTheory.Collatz.CycleElementBound
 #print axioms CollatzCycleElementBound.cc_cycle_element_bound
 #print axioms CollatzCycleElementBound.cc_cycle_element_lt_six_pow
 #print axioms CollatzCycleElementBound.cc_cycle_length_finite_test
 -- 2026-07-05: cycle approximation quality + min-element/length composition with mu(log2 3)<=61
 -- (cycle_min_le_const_mul_length_pow inherits the 2 documented native_decide facts of OSalikhovUnconditional)
-import Propositio.Collatz.CycleLengthBound
+import Propositio.NumberTheory.Collatz.CycleLengthBound
 #print axioms CollatzCycleLengthBound.cycle_approx_quality_abs
 #print axioms CollatzCycleLengthBound.cycle_min_lt_four_pow
 #print axioms CollatzCycleLengthBound.cycle_min_le_const_mul_length_pow
@@ -927,7 +927,7 @@ import Propositio.NumberTheory.Zsygmondy.ZsygmondyOddPrimeLTE
 -- 2026-06-29: Collatz cc-cycle Steiner-numerator bounds — UNCONDITIONAL lower bounds (3^(L-1)≤Steiner,
 -- element lower bound) + obstruction iff (Steiner<3^L ↔ element bound). Confirms hsteiner is the full
 -- element bound (not a cheaper side-condition; routes to transcendence layer). Gate exit-0 + panel 4/4.
-import Propositio.Collatz.SteinerNumerator
+import Propositio.NumberTheory.Collatz.SteinerNumerator
 #print axioms CollatzSteinerNumerator.steiner_ge
 #print axioms CollatzSteinerNumerator.steiner_lower_bound
 #print axioms CollatzSteinerNumerator.cc_cycle_element_lower_bound
@@ -1080,7 +1080,7 @@ import Propositio.Geometry.Monsky.MonskySpernerParity
 -- 2026-07-09: Exact closed-form count of admissible total-valuations A per Collatz cycle
 -- length L (window 3^L < 2^A < 4^L): admissibleA_card. CORRECTS an off-by-one error in the
 -- proof-queue's originally conjectured formula (verified against L=11,12,13 actual data).
-import Propositio.Collatz.AdmissibleACount
+import Propositio.NumberTheory.Collatz.AdmissibleACount
 #print axioms CollatzAdmissibleACount.admissibleA_card
 #print axioms CollatzAdmissibleACount.mem_admissibleA_iff
 -- 2026-07-09: Erdos-Straus n=13 mod 24 residue brick (Mordell/Ionascu-Wilson identity) --
@@ -1107,7 +1107,7 @@ import Propositio.Geometry.Monsky.MonskyPathParity
 -- literally stated ("every unit of Z[zeta5] = integer mod lambda^4") is FALSE (zeta5, phi
 -- counterexamples); true statement is phi^n = integer mod lambda^4 iff 5|n. Prior "Baker-class"
 -- diagnosis was a mis-diagnosis -- the obstruction is a decidable finite-ring fact.
-import Propositio.Beal.KummerLambda4Congruence
+import Propositio.NumberTheory.Beal.KummerLambda4Congruence
 #print axioms BealKummerLambda4Congruence.obstruction_zmod5
 #print axioms BealKummerLambda4Congruence.golden_pow_cong_lambda4_iff_coeff
 #print axioms BealKummerLambda4Congruence.golden_pow_cong_lambda4_of_five_dvd
@@ -1127,14 +1127,14 @@ import Propositio.Geometry.Monsky.MonskyBoundaryComposition
 #print axioms MonskyBoundaryComposition.rainbow_nonempty_of_chained_boundary
 -- 2026-07-09: Collatz valuation second moment -- Sum a^2*2^(M-a-1) = 3*2^M-(M^2+2M+3),
 -- second-moment companion to expected_valuation_sum (E[a]->2). Gives E[a^2]->6, Var[a]->2.
-import Propositio.Collatz.ValuationSecondMoment
+import Propositio.NumberTheory.Collatz.ValuationSecondMoment
 #print axioms CollatzValuationSecondMoment.second_moment_sum
 #print axioms CollatzValuationSecondMoment.sq_add_bound
 -- 2026-07-09: Beal norm bridge -- N(1-zeta5)=5 and the transfer lambda^2|m => 5|m for
 -- rational integers m. Completes the converse-direction ingredient for
 -- BealKummerLambda4Congruence's phi^n=integer mod lambda^4 iff 5|n characterization
 -- (composition with that file is future work, not done here).
-import Propositio.Beal.LambdaNormBridge
+import Propositio.NumberTheory.Beal.LambdaNormBridge
 #print axioms BealLambdaNormBridge.cyclotomic_five_irreducible_rat
 #print axioms BealLambdaNormBridge.finrank_eq_four
 #print axioms BealLambdaNormBridge.norm_zeta_sub_one
@@ -1165,7 +1165,7 @@ import Propositio.Combinatorics.FriendshipTheorem
 -- BealKummerLambda4Congruence + BealLambdaNormBridge into the genuine bidirectional
 -- characterization phi^n=3^n mod lambda^4 (with an INTEGRAL witness, essential to avoid
 -- field-vacuity) iff 5|n.
-import Propositio.Beal.Lambda4FullCharacterization
+import Propositio.NumberTheory.Beal.Lambda4FullCharacterization
 #print axioms BealLambda4FullCharacterization.golden_pow_cong_lambda4_iff_five_dvd
 -- 2026-07-09: Monsky dichromatic-line lemma generalized from Q x Q to R x R (irrational
 -- vertex coordinates matter for equidissections). Generic version for any field + abstract
@@ -1178,7 +1178,7 @@ import Propositio.Geometry.Monsky.MonskyDichromaticLineReal
 -- condition on the golden unit (20-periodic in n) can NEVER force the descent-closing
 -- requirement z|n (period z, coprime to 20 for admissible z). Explains precisely why the
 -- successful finite-ring lens on phi does not transfer to close the actual Beal wall.
-import Propositio.Beal.DescentUnitLambda4
+import Propositio.NumberTheory.Beal.DescentUnitLambda4
 #print axioms BealDescentUnitLambda4.kummer_lambda4_cannot_force_descent
 #print axioms BealDescentUnitLambda4.dvd_not_periodic
 -- 2026-07-09: Monsky genuine 3-color door-counting identity. Shows the abstract 2-Bool
@@ -1226,7 +1226,7 @@ import Propositio.NumberTheory.ErdosStraus.ErdosStrausThreeSixtyOneMod456
 #print axioms ErdosStrausThreeSixtyOneMod456.hasRep_of_threeSixtyOne_mod_456
 -- 2026-07-09: Beal (5,5,z) local obstruction at split prime q=41, extending the finite
 -- mod-q sumset-image family (BealFifthPower q=11, BealLocalCRT q=31 + mod-341 CRT).
-import Propositio.Beal.FifthMod41
+import Propositio.NumberTheory.Beal.FifthMod41
 #print axioms BealFifthMod41.fifth_sum_gap_mod41
 #print axioms BealFifthMod41.fifth_sum_forbidden_mod41_card
 -- 2026-07-09: Erdos-Straus n=552u+529 residue brick (fifth rung of the Mordell ladder,
@@ -1237,7 +1237,7 @@ import Propositio.NumberTheory.ErdosStraus.ErdosStrausFiveTwentyNineMod552
 -- 2026-07-09: Beal (5,5,z) local obstruction at split prime q=61, extending the finite
 -- mod-q sumset-image family further (q=11,31,41 -> 61). Forbidden set {4,5,6,9,17,23,38,
 -- 44,52,55,56,57} (12 residues). q>=71 expected to be surjective (dead end for this family).
-import Propositio.Beal.FifthMod61
+import Propositio.NumberTheory.Beal.FifthMod61
 #print axioms BealFifthMod61.fifth_sum_gap_mod61
 #print axioms BealFifthMod61.fifth_sum_forbidden_mod61_card
 #print axioms BealFifthMod61.beal_fifth_mod61_obstruction
@@ -1291,7 +1291,7 @@ import Propositio.Geometry.Monsky.MonskyRainbowDetCorrected
 -- 2026-07-09: Beal (5,5,z) 4-prime CRT capstone, combining the q=11,31,41,61 local
 -- obstructions into one composite modulus 852841=11*31*41*61, ~82% forbidden density.
 -- Pure algebra (CRT projection), no new decide grids.
-import Propositio.Beal.FifthCRTFour
+import Propositio.NumberTheory.Beal.FifthCRTFour
 #print axioms BealFifthCRTFour.fifth_sum_forbidden_mod852841
 #print axioms BealFifthCRTFour.fifth_sum_composite_forbidden_mod852841
 #print axioms BealFifthCRTFour.beal_fifth_mod852841_obstruction
@@ -1299,7 +1299,7 @@ import Propositio.Beal.FifthCRTFour
 -- quintic factorization/gcd/coprimality chain). NOT a full Case I proof -- the descent assembly
 -- and the parallel 5|(x+y) sub-case are explicitly out of scope; each lemma is independently
 -- real (no sorry/axiom), self-verifying via decide/ring.
-import Propositio.Beal.FermatLastTheoremFiveCaseOne
+import Propositio.NumberTheory.Beal.FermatLastTheoremFiveCaseOne
 #print axioms FermatLastTheoremFiveCaseOne.sophie_germain_ne_mod_eleven
 #print axioms FermatLastTheoremFiveCaseOne.sophie_germain_dvd_prod
 #print axioms FermatLastTheoremFiveCaseOne.five_not_fifth_power_mod_eleven
@@ -1312,7 +1312,7 @@ import Propositio.Beal.FermatLastTheoremFiveCaseOne
 -- 2026-07-10: Case I of FLT-5, COMPLETE (Sophie Germain q=11 argument, no descent needed --
 -- the anticipated genetic-descent gap turned out unnecessary; Germain's own finite modular
 -- proof, using exactly the two facts already proved above, closes it directly).
-import Propositio.Beal.FermatLastTheoremFiveCaseOneDescent
+import Propositio.NumberTheory.Beal.FermatLastTheoremFiveCaseOneDescent
 #print axioms FermatLastTheoremFiveCaseOne.cast_add_eq_cast_of_pow_five_eq
 #print axioms FermatLastTheoremFiveCaseOne.five_not_dvd_add_of_not_dvd_third
 #print axioms FermatLastTheoremFiveCaseOne.case1_core
@@ -1325,7 +1325,7 @@ import Propositio.Beal.FermatLastTheoremFiveCaseOneDescent
 -- 5 * (5th power) and the other 5^(5n+4) * (5th power), where n+1 = v_5(z). This is a real,
 -- self-contained partial brick; the subsequent ℤ[φ] unit-pinning infinite-descent step (the
 -- genuinely hard Legendre content) is NOT attempted here -- see session report.
-import Propositio.Beal.FermatLastTheoremFiveCaseTwo
+import Propositio.NumberTheory.Beal.FermatLastTheoremFiveCaseTwo
 #print axioms FermatLastTheoremFiveCaseTwo.case2_core
 #print axioms FermatLastTheoremFiveCaseTwo.case2_dvd_reduction
 -- 2026-07-09: Lonely Runner k=4 residual narrowing. Equal-magnitude case now UNCONDITIONAL
@@ -1338,9 +1338,9 @@ import Propositio.Combinatorics.LonelyRunnerFourResidual
 #print axioms LonelyRunnerFourResidual.lonely_runner_four_reduce
 -- 2026-07-09: Collatz mean-2-adic-valuation and second-moment ASYMPTOTIC LIMITS, closing a
 -- gap where the docstrings claimed convergence but no Tendsto statement existed.
-import Propositio.Collatz.DriftLimit
+import Propositio.NumberTheory.Collatz.DriftLimit
 #print axioms CollatzDrift.mean_valuation_tendsto_two
-import Propositio.Collatz.SecondMomentLimit
+import Propositio.NumberTheory.Collatz.SecondMomentLimit
 #print axioms CollatzValuationSecondMoment.second_moment_tendsto_six
 #print axioms CollatzValuationSecondMoment.variance_tendsto_two
 -- 2026-07-09: Erdos-Straus general Mordell-ladder rung, parametrized by k>=1 (numerator
@@ -1365,7 +1365,7 @@ import Propositio.NumberTheory.Zsygmondy.ZsygmondyBaseThree
 -- 12 forbidden residues ({5,10,15,20}) are structurally unachievable as any C^z mod 25 at
 -- all (ramification), so only the other 8 give a non-vacuous disjunct -- theorem is still
 -- sound (only needs one satisfiable disjunct), corrected in the docstring.
-import Propositio.Beal.FifthMod25
+import Propositio.NumberTheory.Beal.FifthMod25
 #print axioms BealFifthMod25.fifth_sum_gap_mod25
 #print axioms BealFifthMod25.fifth_sum_forbidden_mod25_card
 #print axioms BealFifthMod25.beal_fifth_mod25_obstruction
@@ -1502,13 +1502,13 @@ import Propositio.NumberTheory.ErdosStraus.ErdosStrausType1Reduction
 
 -- FLT-5 Case II: transplant the 5-adic factorization into ZZ[phi] (norm-equation
 -- handoff for a future unit-pinning + descent module).
-import Propositio.Beal.FermatLastTheoremFiveCaseTwoTransplant
+import Propositio.NumberTheory.Beal.FermatLastTheoremFiveCaseTwoTransplant
 #print axioms FermatLastTheoremFiveCaseTwo.case2_norm_transplant
 #print axioms FermatLastTheoremFiveCaseTwo.case2_norm_eq
 -- 2026-07-18: ramification/divisibility layer for Z[phi] toward FLT-5 Case II descent.
 -- (5) = (sqrt5)^2, sqrt5 is prime, and the norm-divisibility <-> element-divisibility
 -- lift for sqrt5. Does NOT assemble the full descent (see file docstring). Gate + panel 4/4.
-import Propositio.Beal.GoldenIntRamification
+import Propositio.NumberTheory.Beal.GoldenIntRamification
 #print axioms GoldenInt.sqrt5_dvd_iff_five_dvd_norm
 #print axioms GoldenInt.prime_sqrt5
 #print axioms GoldenInt.sqrt5_valuation_one_of_five_dvd_norm_not_25
@@ -1516,7 +1516,7 @@ import Propositio.Beal.GoldenIntRamification
 -- case2_core are coprime away from sqrt5; concrete Z[phi]-factors caseTwoFactorL/R with
 -- caseTwoFactorL*caseTwoFactorR=ofInt(Phi) as a genuine ring identity. Still NOT the full
 -- descent (exact valuation + unit extraction remain). Gate + panel 4/4.
-import Propositio.Beal.GoldenIntCoprime
+import Propositio.NumberTheory.Beal.GoldenIntCoprime
 #print axioms GoldenInt.caseTwoFactor_common_dvd_sqrt5_sq
 #print axioms GoldenInt.caseTwoFactor_mul
 #print axioms GoldenInt.ofInt_isCoprime
@@ -1524,7 +1524,7 @@ import Propositio.Beal.GoldenIntCoprime
 -- (case2_core itself untouched) and pins the exact sqrt5-adic valuation of the concrete
 -- factor caseTwoFactorL in BOTH branches of the "which factor carries the high 5-power"
 -- case split. Still not the full descent (unit x fifth-power extraction remains). Gate + panel 4/4.
-import Propositio.Beal.FermatLastTheoremFiveCaseTwoCofactors
+import Propositio.NumberTheory.Beal.FermatLastTheoremFiveCaseTwoCofactors
 #print axioms FermatLastTheoremFiveCaseTwo.case2_coprime_cofactors
 #print axioms FermatLastTheoremFiveCaseTwo.sqrt5_valuation_one_caseTwoFactorL
 #print axioms FermatLastTheoremFiveCaseTwo.sqrt5_sq_dvd_caseTwoFactorL_of_25_dvd
@@ -1558,7 +1558,7 @@ import Propositio.NumberTheory.Zsygmondy.ZsygmondyLucasSequence
 
 -- 2026-07-18: Beal Omega-count (prime factors with multiplicity) obstruction --
 -- complementary to the existing radical-based BealABCQuality bound.
-import Propositio.Beal.BigOmegaBound
+import Propositio.NumberTheory.Beal.BigOmegaBound
 #print axioms BealBigOmegaBound.two_pow_cardFactors_le
 #print axioms BealBigOmegaBound.cardFactors_mul_three
 #print axioms BealBigOmegaBound.two_pow_bigOmega_lt_c_pow
@@ -1567,7 +1567,7 @@ import Propositio.Beal.BigOmegaBound
 -- NO power-of-two-modulus congruence can ever close the surviving case left open
 -- by BealFourthPowerLocal (forecloses the "try a bigger modulus" attack line
 -- for all moduli simultaneously; does not close the equation itself).
-import Propositio.Beal.FourthPowerOddZ
+import Propositio.NumberTheory.Beal.FourthPowerOddZ
 #print axioms BealFourthPowerOddZ.card_units_two_pow
 #print axioms BealFourthPowerOddZ.units_pow_bijective_of_odd
 #print axioms BealFourthPowerOddZ.isUnit_intCast_of_odd
@@ -1592,7 +1592,7 @@ import Propositio.Combinatorics.LonelyRunnerFourComplete
 -- real Case II factor. Honest partial progress (does NOT close the descent
 -- -- see the files' own scope notes); panel 4/4 accept, axiom-clean.
 import Propositio.NumberTheory.Diophantine.GoldenIntValuation
-import Propositio.Beal.FermatLastTheoremFiveCaseTwoExtraction
+import Propositio.NumberTheory.Beal.FermatLastTheoremFiveCaseTwoExtraction
 #print axioms GoldenInt.unit_mul_pow_of_isCoprime_mul_eq_pow
 #print axioms GoldenInt.pm_phiZpow_mul_pow_of_isCoprime_mul_eq_pow
 #print axioms GoldenInt.pm_phiZpow_mul_pow_of_mul_conj_eq_pow
@@ -1623,7 +1623,7 @@ import Propositio.Geometry.Monsky.MonskyDissectionHlocal
 -- sqrt5-adic residue/conjugation module + Fibonacci sensor. Honest partial
 -- progress -- does NOT close the descent (wiring to a real solution's
 -- branch, and recombination, remain open). Panel 4/4 accept.
-import Propositio.Beal.FermatLastTheoremFiveCaseTwoUnitPin
+import Propositio.NumberTheory.Beal.FermatLastTheoremFiveCaseTwoUnitPin
 #print axioms GoldenInt.sub_conj
 #print axioms GoldenInt.sqrt5_sq_dvd_pow5_sub
 #print axioms GoldenInt.sqrt5_sq_dvd_pow5_sub_conj
@@ -1666,7 +1666,7 @@ import Propositio.Combinatorics.ErdosRadoSunflowerTight
 -- to be exactly +-sqrt5 times a perfect fifth power. Does NOT assemble the
 -- final infinite-descent recombination (honest scope note in the file).
 -- Panel 4/4 accept.
-import Propositio.Beal.FermatLastTheoremFiveCaseTwoDescentPin
+import Propositio.NumberTheory.Beal.FermatLastTheoremFiveCaseTwoDescentPin
 #print axioms FermatLastTheoremFiveCaseTwo.not_five_dvd_sq_add_sq
 #print axioms FermatLastTheoremFiveCaseTwo.caseTwoFactorL_extraction_strong
 #print axioms FermatLastTheoremFiveCaseTwo.caseTwoFactorL_K_eq_one
@@ -1681,7 +1681,7 @@ import Propositio.Beal.FermatLastTheoremFiveCaseTwoDescentPin
 -- forces a strictly smaller solution, is honestly left open). Panel 4/4
 -- accept, including an independent sympy re-derivation of the polynomial
 -- algebra.
-import Propositio.Beal.FermatLastTheoremFiveCaseTwoDescentRecombination
+import Propositio.NumberTheory.Beal.FermatLastTheoremFiveCaseTwoDescentRecombination
 #print axioms FermatLastTheoremFiveCaseTwo.a_pow_five
 #print axioms FermatLastTheoremFiveCaseTwo.b_pow_five
 #print axioms FermatLastTheoremFiveCaseTwo.caseTwo_descent_equation
@@ -1692,7 +1692,7 @@ import Propositio.Beal.FermatLastTheoremFiveCaseTwoDescentRecombination
 -- exact input the classical "peel the square from a coprime product" step
 -- needs next. Does NOT close the descent (honest scope note in file).
 -- Panel 4/4 accept.
-import Propositio.Beal.FermatLastTheoremFiveCaseTwoDescentPrimitive
+import Propositio.NumberTheory.Beal.FermatLastTheoremFiveCaseTwoDescentPrimitive
 #print axioms FermatLastTheoremFiveCaseTwo.coprime_a_b_of_pm_pow_conj
 #print axioms FermatLastTheoremFiveCaseTwo.caseTwo_gamma_coprime
 #print axioms FermatLastTheoremFiveCaseTwo.coprime_q_Q4
@@ -1706,6 +1706,6 @@ import Propositio.Beal.FermatLastTheoremFiveCaseTwoDescentPrimitive
 -- equation, re-panel confirmed 4/4 (the vacuity lens specifically
 -- re-attempted the exact same exploit and confirmed it no longer works).
 -- Does NOT close the descent.
-import Propositio.Beal.FermatLastTheoremFiveCaseTwoDescentPeel
+import Propositio.NumberTheory.Beal.FermatLastTheoremFiveCaseTwoDescentPeel
 #print axioms FermatLastTheoremFiveCaseTwo.peel_pm_square
 #print axioms FermatLastTheoremFiveCaseTwo.caseTwo_q_and_Q4_each_pm_square

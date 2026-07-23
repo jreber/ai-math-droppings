@@ -1,5 +1,5 @@
 import Propositio.NumberTheory.Diophantine.OSalikhovIntCoord
-import Propositio.Collatz.PowGapOfHdvd
+import Propositio.NumberTheory.Collatz.PowGapOfHdvd
 import Propositio.NumberTheory.Diophantine.LcmGrowthBound
 import Propositio.NumberTheory.Diophantine.OSalikhovGCoeff
 import Propositio.NumberTheory.Diophantine.OSalikhovPFI

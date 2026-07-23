@@ -1,6 +1,6 @@
-import Propositio.Beal.GoldenIntEuclidean
-import Propositio.Beal.GoldenIntUnits
-import Propositio.Beal.GoldenIntRamification
+import Propositio.NumberTheory.Beal.GoldenIntEuclidean
+import Propositio.NumberTheory.Beal.GoldenIntUnits
+import Propositio.NumberTheory.Beal.GoldenIntRamification
 import Mathlib.RingTheory.PrincipalIdealDomain
 import Mathlib.RingTheory.Multiplicity
 import Mathlib.RingTheory.UniqueFactorizationDomain.Multiplicity

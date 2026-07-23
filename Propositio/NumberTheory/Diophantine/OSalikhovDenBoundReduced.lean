@@ -1,6 +1,6 @@
 import Propositio.NumberTheory.Diophantine.OSalikhovDenBound
 import Propositio.NumberTheory.Diophantine.OSalikhovDenDvd
-import Propositio.Collatz.Chebyshev30LcmAll
+import Propositio.NumberTheory.Collatz.Chebyshev30LcmAll
 
 /-!
 # The prize denominator bound, reduced to the single input `hdvd`
