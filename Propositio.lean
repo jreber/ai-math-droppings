@@ -518,6 +518,7 @@ import Propositio.NumberTheory.ErdosStraus.ErdosStrausResidue
 import Propositio.NumberTheory.ErdosStraus.ErdosStrausSharpReduction
 import Propositio.NumberTheory.ErdosStraus.ErdosStrausThirteenMod24
 import Propositio.NumberTheory.ErdosStraus.ErdosStrausThreeSixtyOneMod456
+import Propositio.NumberTheory.ErdosStraus.ErdosStrausTwentyFiveMod120
 import Propositio.NumberTheory.ErdosStraus.ErdosStrausTwoMod3
 import Propositio.NumberTheory.ErdosStraus.ErdosStrausType1Reduction
 import Propositio.NumberTheory.Zsygmondy.Zsygmondy2adicLTE
