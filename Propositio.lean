@@ -37,6 +37,7 @@ import Propositio.Combinatorics.SylvesterGallai
 import Propositio.Geometry.Monsky.MonskyAreaValuationContradiction
 import Propositio.Geometry.Monsky.MonskyBoundaryComposition
 import Propositio.Geometry.Monsky.MonskyBoundaryOddness
+import Propositio.Geometry.Monsky.MonskyBoundarySegmentParity
 import Propositio.Geometry.Monsky.MonskyDiagonalInstance
 import Propositio.Geometry.Monsky.MonskyDichromaticLine
 import Propositio.Geometry.Monsky.MonskyDichromaticLineReal
