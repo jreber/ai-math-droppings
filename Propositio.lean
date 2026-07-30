@@ -520,6 +520,7 @@ import Propositio.NumberTheory.ErdosStraus.ErdosStrausMordellNeverPrime
 import Propositio.NumberTheory.ErdosStraus.ErdosStrausMultiplicative
 import Propositio.NumberTheory.ErdosStraus.ErdosStrausPQGeneralFamily
 import Propositio.NumberTheory.ErdosStraus.ErdosStrausResidue
+import Propositio.NumberTheory.ErdosStraus.ErdosStrausResiduePartition
 import Propositio.NumberTheory.ErdosStraus.ErdosStrausSharpReduction
 import Propositio.NumberTheory.ErdosStraus.ErdosStrausThirteenMod24
 import Propositio.NumberTheory.ErdosStraus.ErdosStrausThreeSixtyOneMod456
