@@ -46,6 +46,7 @@ import Propositio.Geometry.Monsky.MonskyEdgeMultiplicityAtMostTwo
 import Propositio.Geometry.Monsky.MonskyHmultWiring
 import Propositio.Geometry.Monsky.MonskyOddCountInstance
 import Propositio.Geometry.Monsky.MonskyPathParity
+import Propositio.Geometry.Monsky.MonskyPerimeterEdgeMultiplicity
 import Propositio.Geometry.Monsky.MonskyRainbowDetCorrected
 import Propositio.Geometry.Monsky.MonskyRainbowDeterminant
 import Propositio.Geometry.Monsky.MonskySpernerParity
