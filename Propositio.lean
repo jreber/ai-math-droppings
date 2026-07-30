@@ -337,6 +337,7 @@ import Propositio.NumberTheory.Collatz.SyracuseMaxGrowth
 import Propositio.NumberTheory.Collatz.SyracuseNoTwoCycle
 import Propositio.NumberTheory.Collatz.SyracuseResidueBias
 import Propositio.NumberTheory.Collatz.SyracuseThreeAdicBias
+import Propositio.NumberTheory.Collatz.SyracuseTwoStepValuationIndependence
 import Propositio.NumberTheory.Collatz.SyracuseValuationDistribution
 import Propositio.NumberTheory.Collatz.TailDecayUncond
 import Propositio.NumberTheory.Collatz.TenCycle
