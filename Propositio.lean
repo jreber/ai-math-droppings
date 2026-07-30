@@ -50,6 +50,7 @@ import Propositio.Geometry.Monsky.MonskyPerimeterEdgeMultiplicity
 import Propositio.Geometry.Monsky.MonskyRainbowDetCorrected
 import Propositio.Geometry.Monsky.MonskyRainbowDeterminant
 import Propositio.Geometry.Monsky.MonskySpernerParity
+import Propositio.Geometry.Monsky.MonskySteinerInterior
 import Propositio.Geometry.Monsky.MonskyThreeColorDoors
 import Propositio.Geometry.Monsky.MonskyTwoAdicValuation
 import Propositio.NumberTheory.Analytic.AverageOrders
