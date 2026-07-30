@@ -295,6 +295,7 @@ import Propositio.NumberTheory.Collatz.LogDensityTransfer
 import Propositio.NumberTheory.Collatz.Lyapunov
 import Propositio.NumberTheory.Collatz.LyapunovCascade
 import Propositio.NumberTheory.Collatz.Modular
+import Propositio.NumberTheory.Collatz.MultidimKionkeLemma1
 import Propositio.NumberTheory.Collatz.NineCycle
 import Propositio.NumberTheory.Collatz.NonDescentWeight
 import Propositio.NumberTheory.Collatz.ParityBijection
