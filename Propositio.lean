@@ -21,6 +21,7 @@ import Propositio.Combinatorics.LonelyRunnerBandPairReduction
 import Propositio.Combinatorics.LonelyRunnerBandPairRemaining
 import Propositio.Combinatorics.LonelyRunnerCoprimeKernel
 import Propositio.Combinatorics.LonelyRunnerFiveReduction
+import Propositio.Combinatorics.LonelyRunnerFixedTimeMod5
 import Propositio.Combinatorics.LonelyRunnerFour
 import Propositio.Combinatorics.LonelyRunnerFourComplete
 import Propositio.Combinatorics.LonelyRunnerFourFull
